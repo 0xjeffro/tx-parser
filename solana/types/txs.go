@@ -10,14 +10,14 @@ type RawTx struct {
 	Transaction      Transaction `json:"transaction"`
 }
 
-type Instructions struct {
+type Instruction struct {
 	Accounts       []int  `json:"accounts"`
 	Data           string `json:"data"`
 	ProgramIDIndex int    `json:"programIdIndex"`
 }
 type InnerInstructions struct {
-	Index        int            `json:"index"`
-	Instructions []Instructions `json:"instructions"`
+	Index        int           `json:"index"`
+	Instructions []Instruction `json:"instructions"`
 }
 type LoadedAddresses struct {
 	Readonly []string `json:"readonly"`
@@ -55,11 +55,11 @@ type Header struct {
 	NumRequiredSignatures       int `json:"numRequiredSignatures"`
 }
 type Message struct {
-	AccountKeys         []string       `json:"accountKeys"`
-	AddressTableLookups interface{}    `json:"addressTableLookups"`
-	Header              Header         `json:"header"`
-	Instructions        []Instructions `json:"instructions"`
-	RecentBlockHash     string         `json:"recentBlockhash"`
+	AccountKeys         []string      `json:"accountKeys"`
+	AddressTableLookups interface{}   `json:"addressTableLookups"`
+	Header              Header        `json:"header"`
+	Instructions        []Instruction `json:"instructions"`
+	RecentBlockHash     string        `json:"recentBlockhash"`
 }
 
 type Transaction struct {
@@ -107,5 +107,3 @@ type ParsedTx struct {
 	TransactionError interface{} `json:"transactionError"`
 	Type             string      `json:"type"`
 }
-
-type Transactions []ParsedTx

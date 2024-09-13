@@ -1,0 +1,54 @@
+package types
+
+type ParsedResult struct {
+	RawTx       RawTx    `json:"rawTx"`
+	AccountList []string `json:"accountList"`
+	Actions     []Action `json:"actions"`
+}
+
+type Action interface {
+	GetProgramID() string
+	GetProgramName() string
+	GetInstructionName() string
+}
+
+type BaseAction struct {
+	ProgramID       string `json:"programId"`
+	ProgramName     string `json:"programName"`
+	InstructionName string `json:"instructionName"`
+}
+
+func (a BaseAction) GetProgramID() string {
+	return a.ProgramID
+}
+
+func (a BaseAction) GetProgramName() string {
+	return a.ProgramName
+}
+
+func (a BaseAction) GetInstructionName() string {
+	return a.InstructionName
+}
+
+type UnknownAction struct {
+	BaseAction
+	Error error `json:"error"`
+}
+
+type PumpFunBuyAction struct {
+	BaseAction
+	Who             string `json:"who"`
+	FromToken       string `json:"fromToken"`
+	FromTokenAmount uint64 `json:"fromTokenAmount"`
+	ToToken         string `json:"toToken"`
+	ToTokenAmount   uint64 `json:"toTokenAmount"`
+}
+
+type PumpFunSellAction struct {
+	BaseAction
+	Who             string `json:"who"`
+	FromToken       string `json:"fromToken"`
+	FromTokenAmount uint64 `json:"fromTokenAmount"`
+	ToToken         string `json:"toToken"`
+	ToTokenAmount   uint64 `json:"toTokenAmount"`
+}
