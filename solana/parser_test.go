@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func TestPumpFunSell(t *testing.T) {
+func TestPumpFunSell_0(t *testing.T) {
 	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
 	if err != nil {
 		t.Errorf("Error opening JSON file: %v", err)
