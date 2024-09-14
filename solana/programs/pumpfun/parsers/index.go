@@ -25,7 +25,7 @@ func Router(result *types.ParsedResult, i int) (types.Action, error) {
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
 				ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-				ProgramName:     "PumpFun",
+				ProgramName:     pumpfun.ProgramName,
 				InstructionName: "Unknown",
 			},
 		}, nil

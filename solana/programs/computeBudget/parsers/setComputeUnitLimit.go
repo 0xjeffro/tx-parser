@@ -1,6 +1,7 @@
 package parsers
 
 import (
+	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
@@ -20,8 +21,8 @@ func SetComputeUnitLimitParser(result *types.ParsedResult, i int, decodedData []
 	action := types.ComputeBudgetSetComputeUnitLimitAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex],
-			ProgramName:     "computeBudget",
-			InstructionName: "setComputeUnitLimit",
+			ProgramName:     computeBudget.ProgramName,
+			InstructionName: "SetComputeUnitLimit",
 		},
 		ComputeUnitLimit: data.Unit,
 	}

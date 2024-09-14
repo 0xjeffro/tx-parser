@@ -23,8 +23,8 @@ func SellParser(result *types.ParsedResult, i int, decodedData []byte) (*types.P
 	action := types.PumpFunSellAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       pumpfun.Program,
-			ProgramName:     "PumpFun",
-			InstructionName: "sell",
+			ProgramName:     pumpfun.ProgramName,
+			InstructionName: "Sell",
 		},
 		Who:             result.AccountList[result.RawTx.Transaction.Message.Instructions[i].Accounts[6]],
 		FromToken:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].Accounts[2]],

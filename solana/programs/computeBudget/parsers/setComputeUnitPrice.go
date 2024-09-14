@@ -1,6 +1,7 @@
 package parsers
 
 import (
+	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
@@ -20,8 +21,8 @@ func SetComputeUnitPriceParser(result *types.ParsedResult, i int, decodedData []
 	action := types.ComputeBudgetSetComputeUnitPriceAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex],
-			ProgramName:     "computeBudget",
-			InstructionName: "setComputeUnitPrice",
+			ProgramName:     computeBudget.ProgramName,
+			InstructionName: "SetComputeUnitPrice",
 		},
 		MicroLamports: data.Units,
 	}

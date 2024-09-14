@@ -5,12 +5,16 @@ import (
 	ComputeBudgetParsers "github.com/0xjeffro/tx-parser/solana/programs/computeBudget/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	PumpfunParsers "github.com/0xjeffro/tx-parser/solana/programs/pumpfun/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
+	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
 func router(result *types.ParsedResult, i int) (types.Action, error) {
 	programID := result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex]
 	switch programID {
+	case systemProgram.Program:
+		return SystemProgramParsers.Router(result, i)
 	case computeBudget.Program:
 		return ComputeBudgetParsers.Router(result, i)
 	case pumpfun.Program:
