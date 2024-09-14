@@ -10,17 +10,17 @@ type SetComputeUnitLimitData struct {
 	Unit          uint32
 }
 
-func SetComputeUnitLimitParser(result *types.ParsedResult, i int, decodedData []byte) (*types.SysComputeBudgetSetComputeUnitLimitAction, error) {
+func SetComputeUnitLimitParser(result *types.ParsedResult, i int, decodedData []byte) (*types.ComputeBudgetSetComputeUnitLimitAction, error) {
 	var data SetComputeUnitLimitData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.SysComputeBudgetSetComputeUnitLimitAction{
+	action := types.ComputeBudgetSetComputeUnitLimitAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex],
-			ProgramName:     "ComputeBudget",
+			ProgramName:     "computeBudget",
 			InstructionName: "setComputeUnitLimit",
 		},
 		ComputeUnitLimit: data.Unit,

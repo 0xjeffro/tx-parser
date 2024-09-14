@@ -2,8 +2,8 @@ package solana
 
 import (
 	"github.com/0xjeffro/tx-parser/solana/globals"
+	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
-	"github.com/0xjeffro/tx-parser/solana/programs/sysComputeBudget"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
@@ -49,9 +49,9 @@ func TestComputeBudgetSetComputeUnitLimit(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
-	if setAction, ok := action.(*types.SysComputeBudgetSetComputeUnitLimitAction); ok {
-		assert.Equal(t, setAction.ProgramID, sysComputeBudget.Program)
-		assert.Equal(t, setAction.ProgramName, "ComputeBudget")
+	if setAction, ok := action.(*types.ComputeBudgetSetComputeUnitLimitAction); ok {
+		assert.Equal(t, setAction.ProgramID, computeBudget.Program)
+		assert.Equal(t, setAction.ProgramName, "computeBudget")
 		assert.Equal(t, setAction.InstructionName, "setComputeUnitLimit")
 		assert.Equal(t, setAction.ComputeUnitLimit, uint32(100000))
 	} else {
@@ -71,9 +71,9 @@ func TestComputeBudgetSetComputeUnitPrice(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[2]
-	if setAction, ok := action.(*types.SysComputeBudgetSetComputeUnitPriceAction); ok {
-		assert.Equal(t, setAction.ProgramID, sysComputeBudget.Program)
-		assert.Equal(t, setAction.ProgramName, "ComputeBudget")
+	if setAction, ok := action.(*types.ComputeBudgetSetComputeUnitPriceAction); ok {
+		assert.Equal(t, setAction.ProgramID, computeBudget.Program)
+		assert.Equal(t, setAction.ProgramName, "computeBudget")
 		assert.Equal(t, setAction.InstructionName, "setComputeUnitPrice")
 		assert.Equal(t, setAction.MicroLamports, uint64(315000))
 	} else {

@@ -1,11 +1,11 @@
 package types
 
-type SysComputeBudgetSetComputeUnitLimitAction struct {
+type ComputeBudgetSetComputeUnitLimitAction struct {
 	BaseAction
 	ComputeUnitLimit uint32 `json:"computeUnitLimit"`
 }
 
-type SysComputeBudgetSetComputeUnitPriceAction struct {
+type ComputeBudgetSetComputeUnitPriceAction struct {
 	BaseAction
 	MicroLamports uint64 `json:"microLamports"`
 }

@@ -10,17 +10,17 @@ type SetComputeUnitPriceData struct {
 	Units         uint64
 }
 
-func SetComputeUnitPriceParser(result *types.ParsedResult, i int, decodedData []byte) (*types.SysComputeBudgetSetComputeUnitPriceAction, error) {
+func SetComputeUnitPriceParser(result *types.ParsedResult, i int, decodedData []byte) (*types.ComputeBudgetSetComputeUnitPriceAction, error) {
 	var data SetComputeUnitPriceData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.SysComputeBudgetSetComputeUnitPriceAction{
+	action := types.ComputeBudgetSetComputeUnitPriceAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex],
-			ProgramName:     "ComputeBudget",
+			ProgramName:     "computeBudget",
 			InstructionName: "setComputeUnitPrice",
 		},
 		MicroLamports: data.Units,

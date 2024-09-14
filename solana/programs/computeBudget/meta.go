@@ -1,4 +1,4 @@
-package sysComputeBudget
+package computeBudget
 
 const Program = "ComputeBudget111111111111111111111111111111"
 
