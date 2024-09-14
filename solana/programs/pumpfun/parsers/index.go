@@ -6,7 +6,7 @@ import (
 	"github.com/mr-tron/base58"
 )
 
-func Parser(result *types.ParsedResult, i int) (types.Action, error) {
+func Router(result *types.ParsedResult, i int) (types.Action, error) {
 	instruction := result.RawTx.Transaction.Message.Instructions[i]
 	data := instruction.Data
 	decode, err := base58.Decode(data)

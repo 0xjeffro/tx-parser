@@ -10,7 +10,7 @@ func router(result *types.ParsedResult, i int) (types.Action, error) {
 	programID := result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex]
 	switch programID {
 	case pumpfun.Program:
-		return PumpfunParsers.Parser(result, i)
+		return PumpfunParsers.Router(result, i)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
