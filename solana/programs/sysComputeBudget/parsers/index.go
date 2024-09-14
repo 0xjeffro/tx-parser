@@ -18,6 +18,8 @@ func Router(result *types.ParsedResult, i int) (types.Action, error) {
 	switch discriminator {
 	case sysComputeBudget.SetComputeUnitLimitDiscriminator:
 		return SetComputeUnitLimitParser(result, i, decode)
+	case sysComputeBudget.SetComputeUnitPriceDiscriminator:
+		return SetComputeUnitPriceParser(result, i, decode)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{

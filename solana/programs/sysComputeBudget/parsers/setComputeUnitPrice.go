@@ -5,26 +5,25 @@ import (
 	"github.com/near/borsh-go"
 )
 
-type SetComputeUnitLimitData struct {
+type SetComputeUnitPriceData struct {
 	Discriminator uint8
-	Unit          uint32
+	Units         uint64
 }
 
-func SetComputeUnitLimitParser(result *types.ParsedResult, i int, decodedData []byte) (*types.SysComputeBudgetSetComputeUnitLimitAction, error) {
-	var data SetComputeUnitLimitData
+func SetComputeUnitPriceParser(result *types.ParsedResult, i int, decodedData []byte) (*types.SysComputeBudgetSetComputeUnitPriceAction, error) {
+	var data SetComputeUnitPriceData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.SysComputeBudgetSetComputeUnitLimitAction{
+	action := types.SysComputeBudgetSetComputeUnitPriceAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex],
 			ProgramName:     "ComputeBudget",
-			InstructionName: "setComputeUnitLimit",
+			InstructionName: "setComputeUnitPrice",
 		},
-		ComputeUnitLimit: data.Unit,
+		MicroLamports: data.Units,
 	}
-
 	return &action, nil
 }

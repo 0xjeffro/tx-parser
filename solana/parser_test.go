@@ -58,3 +58,25 @@ func TestComputeBudgetSetComputeUnitLimit(t *testing.T) {
 		t.Errorf("Error type assertion")
 	}
 }
+
+func TestComputeBudgetSetComputeUnitPrice(t *testing.T) {
+	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[2]
+	if setAction, ok := action.(*types.SysComputeBudgetSetComputeUnitPriceAction); ok {
+		assert.Equal(t, setAction.ProgramID, sysComputeBudget.Program)
+		assert.Equal(t, setAction.ProgramName, "ComputeBudget")
+		assert.Equal(t, setAction.InstructionName, "setComputeUnitPrice")
+		assert.Equal(t, setAction.MicroLamports, uint64(315000))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
