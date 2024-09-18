@@ -5,6 +5,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
+	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
