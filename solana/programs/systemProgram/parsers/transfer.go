@@ -11,7 +11,7 @@ type TransferData struct {
 	Lamports      uint64
 }
 
-func TransferParser(result *types.ParsedResult, i int, decodedData []byte) (*types.SystemProgramTransferAction, error) {
+func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.SystemProgramTransferAction, error) {
 	var data TransferData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
@@ -20,12 +20,12 @@ func TransferParser(result *types.ParsedResult, i int, decodedData []byte) (*typ
 
 	action := types.SystemProgramTransferAction{
 		BaseAction: types.BaseAction{
-			ProgramID:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex],
+			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     systemProgram.ProgramName,
 			InstructionName: "Transfer",
 		},
-		From:     result.AccountList[result.RawTx.Transaction.Message.Instructions[i].Accounts[0]],
-		To:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].Accounts[1]],
+		From:     result.AccountList[instruction.Accounts[0]],
+		To:       result.AccountList[instruction.Accounts[1]],
 		Lamports: data.Lamports,
 	}
 

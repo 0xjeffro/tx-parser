@@ -7,8 +7,7 @@ import (
 	"github.com/mr-tron/base58"
 )
 
-func Router(result *types.ParsedResult, i int) (types.Action, error) {
-	instruction := result.RawTx.Transaction.Message.Instructions[i]
+func InstructionRouter(result *types.ParsedResult, instruction types.Instruction) (types.Action, error) {
 	data := instruction.Data
 	decode, err := base58.Decode(data)
 	if err != nil {
@@ -18,7 +17,7 @@ func Router(result *types.ParsedResult, i int) (types.Action, error) {
 
 	switch discriminator {
 	case systemProgram.TransferDiscriminator:
-		return TransferParser(result, i, decode)
+		return TransferParser(result, instruction, decode)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{

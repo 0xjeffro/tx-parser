@@ -11,7 +11,7 @@ type TransferData struct {
 	Amount        uint32
 }
 
-func TransferParser(result *types.ParsedResult, i int, decodedData []byte) (*types.TokenProgramTransferAction, error) {
+func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.TokenProgramTransferAction, error) {
 	var data TransferData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
@@ -24,8 +24,8 @@ func TransferParser(result *types.ParsedResult, i int, decodedData []byte) (*typ
 			ProgramName:     tokenProgram.ProgramName,
 			InstructionName: "Transfer",
 		},
-		From:   result.AccountList[result.RawTx.Transaction.Message.Instructions[i].Accounts[0]],
-		To:     result.AccountList[result.RawTx.Transaction.Message.Instructions[i].Accounts[1]],
+		From:   result.AccountList[instruction.Accounts[0]],
+		To:     result.AccountList[instruction.Accounts[1]],
 		Amount: data.Amount,
 	}
 	return &action, nil

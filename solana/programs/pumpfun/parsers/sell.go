@@ -13,7 +13,7 @@ type SellData struct {
 	MinSolOutput  uint64
 }
 
-func SellParser(result *types.ParsedResult, i int, decodedData []byte) (*types.PumpFunSellAction, error) {
+func SellParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.PumpFunSellAction, error) {
 	var sellData SellData
 	err := borsh.Deserialize(&sellData, decodedData)
 	if err != nil {
@@ -26,8 +26,8 @@ func SellParser(result *types.ParsedResult, i int, decodedData []byte) (*types.P
 			ProgramName:     pumpfun.ProgramName,
 			InstructionName: "Sell",
 		},
-		Who:             result.AccountList[result.RawTx.Transaction.Message.Instructions[i].Accounts[6]],
-		FromToken:       result.AccountList[result.RawTx.Transaction.Message.Instructions[i].Accounts[2]],
+		Who:             result.AccountList[instruction.Accounts[6]],
+		FromToken:       result.AccountList[instruction.Accounts[2]],
 		ToToken:         globals.WSOL,
 		FromTokenAmount: sellData.Amount,
 		ToTokenAmount:   sellData.MinSolOutput,

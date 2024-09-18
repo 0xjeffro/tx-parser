@@ -14,15 +14,16 @@ import (
 
 func router(result *types.ParsedResult, i int) (types.Action, error) {
 	programID := result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex]
+	instruction := result.RawTx.Transaction.Message.Instructions[i]
 	switch programID {
 	case systemProgram.Program:
-		return SystemProgramParsers.Router(result, i)
+		return SystemProgramParsers.InstructionRouter(result, instruction)
 	case tokenProgram.Program:
-		return TokenProgramParsers.Router(result, i)
+		return TokenProgramParsers.InstructionRouter(result, instruction)
 	case computeBudget.Program:
-		return ComputeBudgetParsers.Router(result, i)
+		return ComputeBudgetParsers.InstructionRouter(result, instruction)
 	case pumpfun.Program:
-		return PumpfunParsers.Router(result, i)
+		return PumpfunParsers.InstructionRouter(result, instruction)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
