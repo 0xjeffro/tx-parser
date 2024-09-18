@@ -39,6 +39,60 @@ func TestPumpFunSell_0(t *testing.T) {
 	}
 }
 
+func TestPumpFunBuy_0(t *testing.T) {
+	jsonFile, err := os.Open("data/pumpfun_buy_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[2]
+	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
+		assert.Equal(t, buyAction.ProgramName, "PumpFun")
+		assert.Equal(t, buyAction.InstructionName, "Buy")
+		assert.Equal(t, buyAction.Who, "EfbbhahGNuhqEraRZXrwETfsaKxScngEttdQixWAW4WE")
+		assert.Equal(t, buyAction.ToToken, "D66sbPtYqLnwPYcUqjDktrQtb52CnfF77C3sdpNpR8Si")
+		assert.Equal(t, buyAction.FromToken, globals.WSOL)
+		assert.Equal(t, buyAction.ToTokenAmount, uint64(56716561396327))
+		assert.Equal(t, buyAction.FromTokenAmount, uint64(3000000000))
+		assert.Equal(t, buyAction.FeeAmount, uint64(30000000))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestPumpFunBuy_1(t *testing.T) {
+	jsonFile, err := os.Open("data/pumpfun_buy_1.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[4]
+	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
+		assert.Equal(t, buyAction.ProgramName, "PumpFun")
+		assert.Equal(t, buyAction.InstructionName, "Buy")
+		assert.Equal(t, buyAction.Who, "4DdrfiDHpmx55i4SPssxVzS9ZaKLb8qr45NKY9Er9nNh")
+		assert.Equal(t, buyAction.ToToken, "7nYhDYAxQdFn2DRPcjBFPQQz5qb8HeFiJv9o9w6fpump")
+		assert.Equal(t, buyAction.FromToken, globals.WSOL)
+		assert.Equal(t, buyAction.ToTokenAmount, uint64(34612901212710))
+		assert.Equal(t, buyAction.FromTokenAmount, uint64(1000000000))
+		assert.Equal(t, buyAction.FeeAmount, uint64(10000000))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
 func TestComputeBudgetSetComputeUnitLimit(t *testing.T) {
 	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
 	if err != nil {
