@@ -105,3 +105,28 @@ func TestSystemProgramTransfer(t *testing.T) {
 		t.Errorf("Error type assertion")
 	}
 }
+
+func TestTokenProgramTransfer(t *testing.T) {
+	jsonFile, err := os.Open("data/token_transfer_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+
+	if transferAction, ok := action.(*types.TokenProgramTransferAction); ok {
+		assert.Equal(t, transferAction.ProgramID, tokenProgram.Program)
+		assert.Equal(t, transferAction.ProgramName, tokenProgram.ProgramName)
+		assert.Equal(t, transferAction.InstructionName, "Transfer")
+		assert.Equal(t, transferAction.From, "6MkxxzHTzR9KJfd7PSr1c47ufbY3mfPgyqfgJQso7vtL")
+		assert.Equal(t, transferAction.To, "3ZiTyuCBHqFocKpFvU8wPwd6YM284aswxMZfad4w2ode")
+		assert.Equal(t, transferAction.Amount, uint32(3000000000))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
