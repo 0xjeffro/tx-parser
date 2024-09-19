@@ -17,6 +17,9 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	switch discriminator {
 	case tokenProgram.TransferDiscriminator:
 		return TransferParser(result, instruction, decode)
+	case tokenProgram.TransferCheckedDiscriminator:
+		return TransferCheckedParser(result, instruction, decode)
+
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
