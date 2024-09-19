@@ -27,4 +27,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Test
-        run: go test ./... -count=3
+        run: go test ./... -count=3 -coverprofile=coverage.txt
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
