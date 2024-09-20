@@ -2,6 +2,7 @@ package solana
 
 import (
 	"github.com/0xjeffro/tx-parser/solana/globals"
+	"github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg"
 	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
@@ -208,6 +209,34 @@ func TestTokenProgramTransferChecked(t *testing.T) {
 		assert.Equal(t, transferAction.Mint, "AZaxNof3Dy57yXKM99BidjB9vfnzJ3EBuEqiiVnQP71F")
 		assert.Equal(t, transferAction.Amount, uint64(222000000000))
 		assert.Equal(t, transferAction.Decimals, uint64(9))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestU6m2CDdhRgSwap(t *testing.T) {
+	jsonFile, err := os.Open("data/U6m2CDdhRg_swap_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+
+	if transferAction, ok := action.(*types.U6m2CDdhRgSwapAction); ok {
+		assert.Equal(t, transferAction.ProgramID, U6m2CDdhRg.Program)
+		assert.Equal(t, transferAction.ProgramName, U6m2CDdhRg.ProgramName)
+		assert.Equal(t, transferAction.InstructionName, "Unknown")
+		assert.Equal(t, transferAction.FromToken, "7atgF8KQo4wJrD5ATGX7t1V2zVvykPJbFfNeVf1icFv1")
+		assert.Equal(t, transferAction.FromTokenAmount, uint64(358800))
+		assert.Equal(t, transferAction.FromTokenDecimals, uint64(2))
+		assert.Equal(t, transferAction.ToToken, "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY")
+		assert.Equal(t, transferAction.ToTokenAmount, uint64(74619))
+		assert.Equal(t, transferAction.ToTokenDecimals, uint64(6))
 	} else {
 		t.Errorf("Error type assertion")
 	}

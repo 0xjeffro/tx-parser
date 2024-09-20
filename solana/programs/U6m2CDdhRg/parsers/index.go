@@ -1,6 +1,7 @@
-package U6m2CDdhRg
+package parsers
 
 import (
+	"github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
@@ -15,7 +16,7 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	discriminator := *(*[8]byte)(decode[:8])
 
 	switch discriminator {
-	case SwapDiscriminator:
+	case U6m2CDdhRg.SwapDiscriminator:
 		return SwapParser(result, instruction, decode)
 	default:
 		return types.UnknownAction{

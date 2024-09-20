@@ -25,7 +25,7 @@ type LoadedAddresses struct {
 }
 type UITokenAmount struct {
 	Amount         string  `json:"amount"`
-	Decimals       int     `json:"decimals"`
+	Decimals       uint64  `json:"decimals"`
 	UIAmount       float64 `json:"uiAmount"`
 	UIAmountString string  `json:"uiAmountString"`
 }

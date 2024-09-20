@@ -1,6 +1,8 @@
 package solana
 
 import (
+	"github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg"
+	U6m2CDdhRgParsers "github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
 	ComputeBudgetParsers "github.com/0xjeffro/tx-parser/solana/programs/computeBudget/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
@@ -24,6 +26,8 @@ func router(result *types.ParsedResult, i int) (types.Action, error) {
 		return ComputeBudgetParsers.InstructionRouter(result, instruction)
 	case pumpfun.Program:
 		return PumpfunParsers.InstructionRouter(result, instruction)
+	case U6m2CDdhRg.Program:
+		return U6m2CDdhRgParsers.InstructionRouter(result, instruction)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
