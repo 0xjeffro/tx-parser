@@ -13,4 +13,5 @@
 [![codecov](https://codecov.io/github/0xjeffro/tx-parser/graph/badge.svg?token=1VPAKE8N6P)](https://codecov.io/github/0xjeffro/tx-parser)
 ![GitHub License](https://img.shields.io/github/license/0xjeffro/tx-parser)
 
-A powerful library for parsing on-chain transactions into clear, human-readable actions, streamlining blockchain data analysis and interpretation.
+Coming SooOOOooooOOOOOooOOOOOOOOoOOOoooooOOOoooo!
+
