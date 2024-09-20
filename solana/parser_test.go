@@ -241,3 +241,31 @@ func TestU6m2CDdhRgSwap(t *testing.T) {
 		t.Errorf("Error type assertion")
 	}
 }
+
+func TestU6m2CDdhRgSwap1(t *testing.T) {
+	jsonFile, err := os.Open("data/U6m2CDdhRg_swap_1.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[7]
+
+	if transferAction, ok := action.(*types.U6m2CDdhRgSwapAction); ok {
+		assert.Equal(t, transferAction.ProgramID, U6m2CDdhRg.Program)
+		assert.Equal(t, transferAction.ProgramName, U6m2CDdhRg.ProgramName)
+		assert.Equal(t, transferAction.InstructionName, "Unknown")
+		assert.Equal(t, transferAction.FromToken, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, transferAction.FromTokenAmount, uint64(10000000000))
+		assert.Equal(t, transferAction.FromTokenDecimals, uint64(9))
+		assert.Equal(t, transferAction.ToToken, "KMnDBXcPXoz6oMJW5XG4tXdwSWpmWEP2RQM1Uujpump")
+		assert.Equal(t, transferAction.ToTokenAmount, uint64(998528432013))
+		assert.Equal(t, transferAction.ToTokenDecimals, uint64(6))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
