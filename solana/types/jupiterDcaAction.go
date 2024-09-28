@@ -47,6 +47,7 @@ type JupiterWithDrawAction struct {
 	BaseAction
 	// WithDrawParams
 	// ...
+	// 58eYP8XhJKfVNm189hQinBcLacDqiYXnTadwzxXbdh9ssDNnmBi9FqaMKMkzgeiykfCDGowfREfh8p7Gziggikm9
 	User       string `json:"user"`
 	Dca        string `json:"dca"`
 	InputMint  string `json:"inputMint"`
