@@ -4,6 +4,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg"
 	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
+	"github.com/0xjeffro/tx-parser/solana/programs/jupiterDCA"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
@@ -265,6 +266,41 @@ func TestU6m2CDdhRgSwap1(t *testing.T) {
 		assert.Equal(t, transferAction.ToToken, "KMnDBXcPXoz6oMJW5XG4tXdwSWpmWEP2RQM1Uujpump")
 		assert.Equal(t, transferAction.ToTokenAmount, uint64(998528432013))
 		assert.Equal(t, transferAction.ToTokenDecimals, uint64(6))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestJupiterDcaOpenDcaV2_0(t *testing.T) {
+	jsonFile, err := os.Open("data/jupiterDCA_openDcaV2_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[0]
+
+	if DcaAction, ok := action.(*types.JupiterDcaOpenV2Action); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+		assert.Equal(t, DcaAction.Dca, "7F3Wg8gzekghzqPLGubCSSjZGj6ihVb14A6QmGKjNL92")
+		assert.Equal(t, DcaAction.User, "BxDjGoj9y33tmkKMK5dRHeUGkSGWEs4H51uHoQaBv9Wz")
+		assert.Equal(t, DcaAction.Payer, "BxDjGoj9y33tmkKMK5dRHeUGkSGWEs4H51uHoQaBv9Wz")
+		assert.Equal(t, DcaAction.InputMint, "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY")
+		assert.Equal(t, DcaAction.OutputMint, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, DcaAction.UserAta, "8f53JuPmhMhYDhJwGawysBvAWmWyAA1oqXmUT475QjDr")
+		assert.Equal(t, DcaAction.InAta, "A9Go8ThBWWue7Jcpnrzd8RegjJ1weJQMjBkJWiEuao6f")
+		assert.Equal(t, DcaAction.OutAta, "3YYfQQkd4c97KR3ieHgMJvs52VaydLyWhCi5wPXmGgx1")
+		assert.Equal(t, DcaAction.InAmount, uint64(217363000000))
+		assert.Equal(t, DcaAction.InAmountPerCycle, uint64(3952054545))
+		assert.Equal(t, DcaAction.CycleFrequency, int64(60))
+		assert.Equal(t, *DcaAction.MinOutAmount, uint64(0))
+		assert.Equal(t, *DcaAction.MaxOutAmount, uint64(0))
+		assert.Equal(t, *DcaAction.StartAt, int64(0))
 	} else {
 		t.Errorf("Error type assertion")
 	}
