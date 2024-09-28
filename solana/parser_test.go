@@ -307,7 +307,7 @@ func TestJupiterDcaOpenDcaV2_0(t *testing.T) {
 }
 
 func TestJupiterDcaOpenDcaV2_1(t *testing.T) {
-	jsonFile, err := os.Open("data/jupiterDCA_openDcaV2_1.json")
+	jsonFile, err := os.Open("data/jupiterDca_openDcaV2_1.json")
 	if err != nil {
 		t.Errorf("Error opening JSON file: %v", err)
 	}
