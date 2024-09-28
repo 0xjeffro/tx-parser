@@ -19,6 +19,8 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 		return OpenDcaV2Parser(result, instruction, decode)
 	case jupiterDCA.EndAndCloseDiscriminator:
 		return EndAndCloseParser(result, instruction, decode)
+	case jupiterDCA.CloseDcaDiscriminator:
+		return CloseDcaParser(result, instruction, decode)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{

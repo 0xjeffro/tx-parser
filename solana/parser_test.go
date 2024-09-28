@@ -423,3 +423,32 @@ func TestJupiterDcaEndAndClose_1(t *testing.T) {
 		t.Errorf("Error type assertion")
 	}
 }
+
+func TestJupiterDcaCloseDca_0(t *testing.T) {
+	jsonFile, err := os.Open("data/jupiterDca_CloseDca_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[0]
+
+	if DcaAction, ok := action.(*types.JupiterDcaCloseDcaAction); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+		assert.Equal(t, DcaAction.User, "3k2pJD3FtFT8zZLoYRgHEQgays1jYs6LYCKi5MWNPLKJ")
+		assert.Equal(t, DcaAction.Dca, "565uLdnjfP69rUpGuE7d5rB65V6BoqYknnWrFdt5ebFk")
+		assert.Equal(t, DcaAction.InputMint, "6T44rfi9BDUdZbEvVddZWVfsGrpC6N1sSSKYnCsLpump")
+		assert.Equal(t, DcaAction.OutputMint, "AiYhnwWiqbdSiEHgAzqrurcdoZx4V21mnuMt5ps2pump")
+		assert.Equal(t, DcaAction.InAta, "HQpRWqAzEUsnNZR3tt8tpHHk7yyw4Q9sJQ27ZQLQ6hoz")
+		assert.Equal(t, DcaAction.OutAta, "4zVid4YvihF4zeQd6RvVNMui7tesa3Jsjmuqvfovx898")
+		assert.Equal(t, DcaAction.UserInAta, "4TQuSH6cQUHFZUxYPX4neGLXZXfR4gqWB9442aoPqDoJ")
+		assert.Equal(t, DcaAction.UserOutAta, "GMjhyph1BXpt6qQV1MmeD1gzdR7GASJFjNo2CBgZj2wa")
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}

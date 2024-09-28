@@ -19,7 +19,7 @@ type JupiterDcaOpenV2Action struct {
 	OutAta     string `json:"payerAta"`
 }
 
-type JupiterDcaCloseAction struct {
+type JupiterDcaCloseDcaAction struct {
 	BaseAction
 	User       string `json:"user"`
 	Dca        string `json:"dca"`
