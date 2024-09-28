@@ -340,3 +340,61 @@ func TestJupiterDcaOpenDcaV2_1(t *testing.T) {
 		t.Errorf("Error type assertion")
 	}
 }
+
+func TestJupiterDcaEndAndClose_0(t *testing.T) {
+	jsonFile, err := os.Open("data/jupiterDca_endAndClose_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[1]
+
+	if DcaAction, ok := action.(*types.JupiterDcaEndAndCloseAction); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+		assert.Equal(t, DcaAction.Keeper, "JD25qVdtd65FoiXNmR89JjmoJdYk9sjYQeSTZAALFiMy")
+		assert.Equal(t, DcaAction.Dca, "Cf8vzN89jMzfgg3XpNGMTkzwihzbm1AHnQy1bVyeLVcy")
+		assert.Equal(t, DcaAction.InputMint, "E1kvzJNxShvvWTrudokpzuc789vRiDXfXG3duCuY6ooE")
+		assert.Equal(t, DcaAction.OutputMint, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
+		assert.Equal(t, DcaAction.InAta, "DZAo37cFYiGJYhN9MjJ7EBz5CHvCJsax6yhZwgJmTxBT")
+		assert.Equal(t, DcaAction.OutAta, "9EjKBrGmodH9vVWgiMu4oK1LnKxMQK9rFMeLpTzVRsDE")
+		assert.Equal(t, DcaAction.User, "E4R1iXBJh8dN869akjGskM8DYkawncMRmtUsuYcTnM5S")
+		assert.Equal(t, DcaAction.UserOutAta, "2HXai2nbYof8Mc5LEXSxLKHHtjJBnFqFFoSjtSj2LuFS")
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestJupiterDcaEndAndClose_1(t *testing.T) {
+	jsonFile, err := os.Open("data/jupiterDca_endAndClose_1.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[1]
+
+	if DcaAction, ok := action.(*types.JupiterDcaEndAndCloseAction); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+		assert.Equal(t, DcaAction.Keeper, "JD38n7ynKYcgPpF7k1BhXEeREu1KqptU93fVGy3S624k")
+		assert.Equal(t, DcaAction.Dca, "DdtdfnA7mPfzbxDfU2hD7DWNe64fWL9eMk3Tb9jw9ncr")
+		assert.Equal(t, DcaAction.InputMint, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
+		assert.Equal(t, DcaAction.OutputMint, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, DcaAction.InAta, "DtzRqfDTAjNV2YmSyMgbPTw1kKpkRqUwtsHoVuAL829T")
+		assert.Equal(t, DcaAction.OutAta, "4WFAeSZU7AWyw8ZCyo4xFvJRevaasXVHxQcPJ4TtKe1y")
+		assert.Equal(t, DcaAction.User, "5aT271zahvBR27MUUkLj8B7KtDGF8r2rZpFHerZi1yEn")
+		assert.Equal(t, DcaAction.UserOutAta, "DCA265Vj8a9CEuX1eb1LWRnDT7uK6q1xMipnNyatn23M")
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}

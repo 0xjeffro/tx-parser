@@ -40,6 +40,7 @@ type JupiterDcaEndAndCloseAction struct {
 	InAta      string `json:"inAta"`
 	OutAta     string `json:"outAta"`
 	User       string `json:"user"`
+	UserOutAta string `json:"userOutAta"`
 }
 
 type JupiterWithDrawAction struct {
