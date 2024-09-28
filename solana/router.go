@@ -16,7 +16,19 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func router(result *types.ParsedResult, i int) (types.Action, error) {
+func router(result *types.ParsedResult, i int) (action types.Action, err error) {
+	defer func() {
+		if err := recover(); err != nil {
+			action = types.UnknownAction{
+				BaseAction: types.BaseAction{
+					ProgramID:       "Unknown",
+					ProgramName:     "Unknown",
+					InstructionName: "Unknown",
+				},
+				Error: err.(error),
+			}
+		}
+	}()
 	programID := result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex]
 	instruction := result.RawTx.Transaction.Message.Instructions[i]
 	switch programID {

@@ -15,6 +15,20 @@ import (
 	"testing"
 )
 
+func TestBrokenData(t *testing.T) {
+	jsonFile, err := os.Open("data/broken_data.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	results, err := Parser(byteValue)
+	assert.Equal(t, results[0].Actions[0].GetProgramID(), "Unknown")
+	assert.Equal(t, results[0].Actions[0].GetProgramName(), "Unknown")
+	assert.Equal(t, results[0].Actions[0].GetInstructionName(), "Unknown")
+
+}
+
 func TestPumpFunSell_0(t *testing.T) {
 	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
 	if err != nil {
