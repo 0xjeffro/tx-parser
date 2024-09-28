@@ -15,8 +15,19 @@ import (
 	"testing"
 )
 
-func TestBrokenData(t *testing.T) {
-	jsonFile, err := os.Open("data/broken_data.json")
+func TestBrokenData_0(t *testing.T) {
+	jsonFile, err := os.Open("data/broken_data_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	_, err = Parser(byteValue)
+	assert.NotEqual(t, err, nil)
+}
+
+func TestBrokenData_1(t *testing.T) {
+	jsonFile, err := os.Open("data/broken_data_1.json")
 	if err != nil {
 		t.Errorf("Error opening JSON file: %v", err)
 	}
