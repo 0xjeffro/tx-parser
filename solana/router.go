@@ -18,15 +18,9 @@ import (
 
 func router(result *types.ParsedResult, i int) (action types.Action, err error) {
 	defer func() {
-		if err := recover(); err != nil {
-			action = types.UnknownAction{
-				BaseAction: types.BaseAction{
-					ProgramID:       "Unknown",
-					ProgramName:     "Unknown",
-					InstructionName: "Unknown",
-				},
-				Error: err.(error),
-			}
+		if r := recover(); r != nil {
+			err = r.(error)
+			action = nil
 		}
 	}()
 	programID := result.AccountList[result.RawTx.Transaction.Message.Instructions[i].ProgramIDIndex]

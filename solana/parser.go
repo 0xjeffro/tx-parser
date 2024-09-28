@@ -30,7 +30,7 @@ func parser(tx types.RawTx) *types.ParsedResult {
 		if err != nil {
 			result.Actions[i] = types.UnknownAction{
 				BaseAction: types.BaseAction{
-					ProgramID:       result.AccountList[tx.Transaction.Message.Instructions[i].ProgramIDIndex],
+					ProgramID:       "Unknown",
 					ProgramName:     "Unknown",
 					InstructionName: "Unknown",
 				},
