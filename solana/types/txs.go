@@ -1,5 +1,11 @@
 package types
 
+type RPCResponse struct {
+	JsonRPC string `json:"jsonrpc"`
+	Result  RawTx  `json:"result"`
+	ID      int    `json:"id"`
+}
+
 type RawTxs []RawTx
 
 type RawTx struct {
