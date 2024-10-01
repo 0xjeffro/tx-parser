@@ -7,3 +7,4 @@ const ProgramName = "PumpFun"
 
 var BuyDiscriminator = utils.CalculateDiscriminator("global:buy")
 var SellDiscriminator = utils.CalculateDiscriminator("global:sell")
+var CreateDiscriminator = utils.CalculateDiscriminator("global:create")

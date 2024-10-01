@@ -120,6 +120,37 @@ func TestPumpFunBuy_1(t *testing.T) {
 	}
 }
 
+func TestPumpFunCreate_0(t *testing.T) {
+	jsonFile, err := os.Open("data/pumpfun_create_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+	if createAction, ok := action.(*types.PumpFunCreateAction); ok {
+		assert.Equal(t, createAction.ProgramID, pumpfun.Program)
+		assert.Equal(t, createAction.ProgramName, "PumpFun")
+		assert.Equal(t, createAction.InstructionName, "Create")
+		assert.Equal(t, createAction.Who, "6xo262KbDXepWbF3vPTrFXysr5vJwk3mozBXmXk3hmMx")
+		assert.Equal(t, createAction.Mint, "5dNYcCZXEGfGgbdUdq7MMR7KLsNJLLLgL83wLH8Fpump")
+		assert.Equal(t, createAction.MintAuthority, "TSLvdd1pWpHVjahSpsvCXUbgwsL3JAcvokwaKt1eokM")
+		assert.Equal(t, createAction.BondingCurve, "CQrqvWERJtEjw2rCCQV6EqfM6V6jzTuKjhJjKNFmGB7r")
+		assert.Equal(t, createAction.AssociatedBondingCurve, "4fF4yd9RVjxpMfuN58AgaZRDT3SuLahM1zGFGcNwSwu5")
+		assert.Equal(t, createAction.MplTokenMetadata, "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s")
+		assert.Equal(t, createAction.MetaData, "DTJKYfWFTCr1EZxehTPbXkU1V9LT5FdmGKJwEXsXuBht")
+		assert.Equal(t, createAction.Name, "MOO DOG")
+		assert.Equal(t, createAction.Symbol, "MOODOG")
+		assert.Equal(t, createAction.Uri, "https://ipfs.io/ipfs/QmbeFeWTrm1u1ev5VreMoqNK4aVuxtBXKpMdTrjdnHj7P3")
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
 func TestComputeBudgetSetComputeUnitLimit(t *testing.T) {
 	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
 	if err != nil {

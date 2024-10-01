@@ -19,6 +19,8 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 		return BuyParser(result, instruction, decode)
 	case pumpfun.SellDiscriminator:
 		return SellParser(result, instruction, decode)
+	case pumpfun.CreateDiscriminator:
+		return CreateParser(result, instruction, decode)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
