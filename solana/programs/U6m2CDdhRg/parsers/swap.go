@@ -7,12 +7,6 @@ import (
 	"strconv"
 )
 
-type SellData struct {
-	Discriminator uint64
-	Amount        uint64
-	MinSolOutput  uint64
-}
-
 func SwapParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.U6m2CDdhRgSwapAction, error) {
 	who := result.AccountList[instruction.Accounts[0]]
 	fromToken := result.AccountList[instruction.Accounts[3]]
