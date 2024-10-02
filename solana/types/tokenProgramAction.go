@@ -15,3 +15,11 @@ type TokenProgramTransferCheckedAction struct {
 	Mint     string `json:"mint"`
 	Decimals uint64 `json:"decimals"`
 }
+
+type TokenProgramInitializeAccountAction struct {
+	BaseAction
+	Account    string `json:"account"`
+	Mint       string `json:"mint"`
+	Owner      string `json:"owner"`
+	RentSysvar string `json:"rentSysvar"`
+}

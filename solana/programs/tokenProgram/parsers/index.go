@@ -19,6 +19,8 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 		return TransferParser(result, instruction, decode)
 	case tokenProgram.TransferCheckedDiscriminator:
 		return TransferCheckedParser(result, instruction, decode)
+	case tokenProgram.InitializeAccountDiscriminator:
+		return InitializeAccountParser(result, instruction)
 
 	default:
 		return types.UnknownAction{

@@ -271,6 +271,32 @@ func TestTokenProgramTransferChecked(t *testing.T) {
 	}
 }
 
+func TestTokenProgramInitializeAccount(t *testing.T) {
+	jsonFile, err := os.Open("data/raydiumLiquidityPoolV4_swap_0.json")
+	if err != nil {
+		t.Errorf("Error opening JSON file: %v", err)
+	}
+	defer jsonFile.Close()
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+
+	if initAction, ok := action.(*types.TokenProgramInitializeAccountAction); ok {
+		assert.Equal(t, initAction.ProgramID, tokenProgram.Program)
+		assert.Equal(t, initAction.ProgramName, tokenProgram.ProgramName)
+		assert.Equal(t, initAction.InstructionName, "InitializeAccount")
+		assert.Equal(t, initAction.Account, "AgcEC7E1yxeZoRVnAZTmGA86ncrPTqKkBiz1T9F5MxhN")
+		assert.Equal(t, initAction.Mint, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, initAction.Owner, "Do3UdALe5F7NRXB4uYcBzZtCbAt8ssu4a5kGZVucKhC5")
+		assert.Equal(t, initAction.RentSysvar, "SysvarRent111111111111111111111111111111111")
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
 func TestU6m2CDdhRgSwap(t *testing.T) {
 	jsonFile, err := os.Open("data/U6m2CDdhRg_swap_0.json")
 	if err != nil {

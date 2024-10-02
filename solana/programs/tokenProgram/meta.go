@@ -6,3 +6,5 @@ const ProgramName = "TokenProgram"
 const TransferDiscriminator = uint8(3)
 
 const TransferCheckedDiscriminator = uint8(12)
+
+const InitializeAccountDiscriminator = uint8(1)
