@@ -223,7 +223,7 @@ func TestTokenProgramTransfer(t *testing.T) {
 		assert.Equal(t, transferAction.InstructionName, "Transfer")
 		assert.Equal(t, transferAction.From, "6MkxxzHTzR9KJfd7PSr1c47ufbY3mfPgyqfgJQso7vtL")
 		assert.Equal(t, transferAction.To, "3ZiTyuCBHqFocKpFvU8wPwd6YM284aswxMZfad4w2ode")
-		assert.Equal(t, transferAction.Amount, uint32(3000000000))
+		assert.Equal(t, transferAction.Amount, uint64(3000000000))
 	} else {
 		t.Errorf("Error type assertion")
 	}

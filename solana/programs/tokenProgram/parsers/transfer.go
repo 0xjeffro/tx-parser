@@ -8,7 +8,7 @@ import (
 
 type TransferData struct {
 	Discriminator uint8
-	Amount        uint32
+	Amount        uint64
 }
 
 func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.TokenProgramTransferAction, error) {
