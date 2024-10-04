@@ -6,6 +6,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiterDCA"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
+	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	"github.com/0xjeffro/tx-parser/solana/types"
@@ -445,6 +446,56 @@ func TestJupiterDcaCloseDca_0(t *testing.T) {
 		assert.Equal(t, DcaAction.OutAta, "4zVid4YvihF4zeQd6RvVNMui7tesa3Jsjmuqvfovx898")
 		assert.Equal(t, DcaAction.UserInAta, "4TQuSH6cQUHFZUxYPX4neGLXZXfR4gqWB9442aoPqDoJ")
 		assert.Equal(t, DcaAction.UserOutAta, "GMjhyph1BXpt6qQV1MmeD1gzdR7GASJFjNo2CBgZj2wa")
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestRaydiumLiquidityPoolV4Swap_0(t *testing.T) {
+	byteValue, err := readJsonFile("data/raydiumLiquidityPoolV4_swap_0.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[4]
+
+	if swapAction, ok := action.(*types.RaydiumLiquidityPoolV4SwapAction); ok {
+		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
+		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "Swap")
+		assert.Equal(t, swapAction.Who, "Do3UdALe5F7NRXB4uYcBzZtCbAt8ssu4a5kGZVucKhC5")
+		assert.Equal(t, swapAction.FromToken, "2CrtdajpSb7DpMRLKP4yMtFLbCsWZjMkEvgSTf4Ypump")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(836112233953))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(6))
+		assert.Equal(t, swapAction.ToToken, globals.WSOL)
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(352936256))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(globals.SOLDecimals))
+		assert.Equal(t, swapAction.MinimumAmountOut, uint64(236647964))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestRaydiumLiquidityPoolV4Swap_1(t *testing.T) {
+	byteValue, err := readJsonFile("data/raydiumLiquidityPoolV4_swap_1.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[4]
+
+	if swapAction, ok := action.(*types.RaydiumLiquidityPoolV4SwapAction); ok {
+		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
+		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "Swap")
+		assert.Equal(t, swapAction.Who, "ECvj86nDupkVh1cDgxrJw3zJkw3ahcDiVB3pPTbpskjD")
+		assert.Equal(t, swapAction.FromToken, globals.WSOL)
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(100000000))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(globals.SOLDecimals))
+		assert.Equal(t, swapAction.ToToken, "E8yBUD4AGdxK7MbQEf85oaAvVBuSoRsGCvX2sMxSpump")
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(43045438075))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(6))
+		assert.Equal(t, swapAction.MinimumAmountOut, uint64(36196423957))
 	} else {
 		t.Errorf("Error type assertion")
 	}
