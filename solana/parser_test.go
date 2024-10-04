@@ -15,24 +15,26 @@ import (
 	"testing"
 )
 
-func TestBrokenData_0(t *testing.T) {
-	jsonFile, err := os.Open("data/broken_data_0.json")
+func readJsonFile(filename string) ([]byte, error) {
+	jsonFile, err := os.Open(filename)
 	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
+		return nil, err
 	}
 	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	return ioutil.ReadAll(jsonFile)
+}
+
+func TestBrokenData_0(t *testing.T) {
+	byteValue, err := readJsonFile("data/broken_data_0.json")
 	_, err = Parser(byteValue)
 	assert.NotEqual(t, err, nil)
 }
 
 func TestBrokenData_1(t *testing.T) {
-	jsonFile, err := os.Open("data/broken_data_1.json")
+	byteValue, err := readJsonFile("data/broken_data_1.json")
 	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
+		t.Errorf("Error reading JSON file: %v", err)
 	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
 	results, err := Parser(byteValue)
 	assert.Equal(t, results[0].Actions[0].GetProgramID(), "Unknown")
 	assert.Equal(t, results[0].Actions[0].GetProgramName(), "Unknown")
@@ -41,14 +43,9 @@ func TestBrokenData_1(t *testing.T) {
 }
 
 func TestPumpFunSell_0(t *testing.T) {
-	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
+	byteValue, err := readJsonFile("data/pumpfun_sell_0.json")
 	if err != nil {
 		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
-	if err != nil {
-		t.Errorf("Error reading JSON file: %v", err)
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
@@ -67,12 +64,7 @@ func TestPumpFunSell_0(t *testing.T) {
 }
 
 func TestPumpFunBuy_0(t *testing.T) {
-	jsonFile, err := os.Open("data/pumpfun_buy_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/pumpfun_buy_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -94,12 +86,7 @@ func TestPumpFunBuy_0(t *testing.T) {
 }
 
 func TestPumpFunBuy_1(t *testing.T) {
-	jsonFile, err := os.Open("data/pumpfun_buy_1.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/pumpfun_buy_1.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -121,12 +108,7 @@ func TestPumpFunBuy_1(t *testing.T) {
 }
 
 func TestPumpFunCreate_0(t *testing.T) {
-	jsonFile, err := os.Open("data/pumpfun_create_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/pumpfun_create_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -152,12 +134,7 @@ func TestPumpFunCreate_0(t *testing.T) {
 }
 
 func TestComputeBudgetSetComputeUnitLimit(t *testing.T) {
-	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/pumpfun_sell_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -174,12 +151,7 @@ func TestComputeBudgetSetComputeUnitLimit(t *testing.T) {
 }
 
 func TestComputeBudgetSetComputeUnitPrice(t *testing.T) {
-	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/pumpfun_sell_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -196,12 +168,7 @@ func TestComputeBudgetSetComputeUnitPrice(t *testing.T) {
 }
 
 func TestSystemProgramTransfer(t *testing.T) {
-	jsonFile, err := os.Open("data/pumpfun_sell_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/pumpfun_sell_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -219,13 +186,31 @@ func TestSystemProgramTransfer(t *testing.T) {
 	}
 }
 
-func TestTokenProgramTransfer(t *testing.T) {
-	jsonFile, err := os.Open("data/token_transfer_0.json")
+func TestSystemProgramCreateAccountWithSeed(t *testing.T) {
+	byteValue, err := readJsonFile("data/raydiumLiquidityPoolV4_swap_0.json")
 	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
+		t.Errorf("Error reading JSON file: %v", err)
 	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[2]
+	if transferAction, ok := action.(*types.SystemProgramCreateAccountWithSeedAction); ok {
+		assert.Equal(t, transferAction.ProgramID, systemProgram.Program)
+		assert.Equal(t, transferAction.ProgramName, systemProgram.ProgramName)
+		assert.Equal(t, transferAction.InstructionName, "CreateAccountWithSeed")
+		assert.Equal(t, transferAction.Who, "Do3UdALe5F7NRXB4uYcBzZtCbAt8ssu4a5kGZVucKhC5")
+		assert.Equal(t, transferAction.NewAccount, "AgcEC7E1yxeZoRVnAZTmGA86ncrPTqKkBiz1T9F5MxhN")
+		assert.Equal(t, transferAction.Base, "Do3UdALe5F7NRXB4uYcBzZtCbAt8ssu4a5kGZVucKhC5")
+		assert.Equal(t, transferAction.Seed, "5PwC7hE3bfVrXbgN21qYnjizph1NWo7g")
+		assert.Equal(t, transferAction.Lamports, uint64(2039280))
+		assert.Equal(t, transferAction.Space, uint64(165))
+		assert.Equal(t, transferAction.Owner, "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA")
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestTokenProgramTransfer(t *testing.T) {
+	byteValue, err := readJsonFile("data/token_transfer_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -245,12 +230,7 @@ func TestTokenProgramTransfer(t *testing.T) {
 }
 
 func TestTokenProgramTransferChecked(t *testing.T) {
-	jsonFile, err := os.Open("data/transferChecked_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/transferChecked_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -272,12 +252,7 @@ func TestTokenProgramTransferChecked(t *testing.T) {
 }
 
 func TestTokenProgramInitializeAccount(t *testing.T) {
-	jsonFile, err := os.Open("data/raydiumLiquidityPoolV4_swap_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/raydiumLiquidityPoolV4_swap_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -298,12 +273,7 @@ func TestTokenProgramInitializeAccount(t *testing.T) {
 }
 
 func TestU6m2CDdhRgSwap(t *testing.T) {
-	jsonFile, err := os.Open("data/U6m2CDdhRg_swap_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/U6m2CDdhRg_swap_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -326,12 +296,7 @@ func TestU6m2CDdhRgSwap(t *testing.T) {
 }
 
 func TestU6m2CDdhRgSwap1(t *testing.T) {
-	jsonFile, err := os.Open("data/U6m2CDdhRg_swap_1.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/U6m2CDdhRg_swap_1.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -354,12 +319,7 @@ func TestU6m2CDdhRgSwap1(t *testing.T) {
 }
 
 func TestJupiterDcaOpenDcaV2_0(t *testing.T) {
-	jsonFile, err := os.Open("data/jupiterDca_openDcaV2_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/jupiterDca_openDcaV2_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -389,12 +349,7 @@ func TestJupiterDcaOpenDcaV2_0(t *testing.T) {
 }
 
 func TestJupiterDcaOpenDcaV2_1(t *testing.T) {
-	jsonFile, err := os.Open("data/jupiterDca_openDcaV2_1.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/jupiterDca_openDcaV2_1.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -424,12 +379,7 @@ func TestJupiterDcaOpenDcaV2_1(t *testing.T) {
 }
 
 func TestJupiterDcaEndAndClose_0(t *testing.T) {
-	jsonFile, err := os.Open("data/jupiterDca_endAndClose_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/jupiterDca_endAndClose_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -453,12 +403,7 @@ func TestJupiterDcaEndAndClose_0(t *testing.T) {
 }
 
 func TestJupiterDcaEndAndClose_1(t *testing.T) {
-	jsonFile, err := os.Open("data/jupiterDca_endAndClose_1.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/jupiterDca_endAndClose_1.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}
@@ -482,12 +427,7 @@ func TestJupiterDcaEndAndClose_1(t *testing.T) {
 }
 
 func TestJupiterDcaCloseDca_0(t *testing.T) {
-	jsonFile, err := os.Open("data/jupiterDca_CloseDca_0.json")
-	if err != nil {
-		t.Errorf("Error opening JSON file: %v", err)
-	}
-	defer jsonFile.Close()
-	byteValue, err := ioutil.ReadAll(jsonFile)
+	byteValue, err := readJsonFile("data/jupiterDca_CloseDca_0.json")
 	if err != nil {
 		t.Errorf("Error reading JSON file: %v", err)
 	}

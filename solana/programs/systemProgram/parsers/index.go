@@ -13,11 +13,13 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	if err != nil {
 		return nil, err
 	}
-	discriminator := binary.LittleEndian.Uint32(decode[:4])
+	discriminator := binary.LittleEndian.Uint32(decode[0:4])
 
 	switch discriminator {
 	case systemProgram.TransferDiscriminator:
 		return TransferParser(result, instruction, decode)
+	case systemProgram.CreateAccountWithSeedDiscriminator:
+		return CreateAccountWithSeedParser(result, instruction, decode)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
