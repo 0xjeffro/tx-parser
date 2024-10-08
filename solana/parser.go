@@ -13,13 +13,13 @@ func Parser(rpcData []byte) ([]types.ParsedResult, error) {
 	}
 	var results []types.ParsedResult
 	for _, tx := range txs {
-		result := parser(tx)
+		result := TxParser(tx)
 		results = append(results, *result)
 	}
 	return results, nil
 }
 
-func parser(tx types.RawTx) *types.ParsedResult {
+func TxParser(tx types.RawTx) *types.ParsedResult {
 	var result types.ParsedResult
 	result.RawTx = tx                                                               // set raw tx
 	result = *getAccountList(&result)                                               // get account list

@@ -1,6 +1,10 @@
 package solana
 
 import (
+	"io/ioutil"
+	"os"
+	"testing"
+
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg"
 	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
@@ -11,9 +15,6 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/stretchr/testify/assert"
-	"io/ioutil"
-	"os"
-	"testing"
 )
 
 func readJsonFile(filename string) ([]byte, error) {
@@ -106,6 +107,59 @@ func TestPumpFunBuy_1(t *testing.T) {
 	} else {
 		t.Errorf("Error type assertion")
 	}
+}
+
+func TestPumpFunBuyBundle(t *testing.T) {
+	byteValue, err := readJsonFile("data/pumpfun_buy_bundle.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[1]
+	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
+		assert.Equal(t, buyAction.ProgramName, "PumpFun")
+		assert.Equal(t, buyAction.InstructionName, "Buy")
+		assert.Equal(t, buyAction.Who, "Gh6D6DZcASQLc2XoLpctT74KbRr4nrHF8wNptweckHoA")
+		assert.Equal(t, buyAction.ToToken, "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY")
+		assert.Equal(t, buyAction.FromToken, globals.WSOL)
+		assert.Equal(t, buyAction.ToTokenAmount, uint64(12373970345963))
+		assert.Equal(t, buyAction.FromTokenAmount, uint64(386100226))
+		assert.Equal(t, buyAction.FeeAmount, uint64(3861002))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+
+	action = results[0].Actions[3]
+	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
+		assert.Equal(t, buyAction.ProgramName, "PumpFun")
+		assert.Equal(t, buyAction.InstructionName, "Buy")
+		assert.Equal(t, buyAction.Who, "7SPkzf8DSxdemSKMEEKquRKEYrdDjcuHaQwac5nvnB4b")
+		assert.Equal(t, buyAction.ToToken, "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY")
+		assert.Equal(t, buyAction.FromToken, globals.WSOL)
+		assert.Equal(t, buyAction.ToTokenAmount, uint64(12100159018198))
+		assert.Equal(t, buyAction.FromTokenAmount, uint64(386820768))
+		assert.Equal(t, buyAction.FeeAmount, uint64(3868207))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+
+	action = results[0].Actions[5]
+	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
+		assert.Equal(t, buyAction.ProgramName, "PumpFun")
+		assert.Equal(t, buyAction.InstructionName, "Buy")
+		assert.Equal(t, buyAction.Who, "GdCFP1doq784rQTHJDuvpLchVWoMtJwdAM8MQTCHWTuz")
+		assert.Equal(t, buyAction.ToToken, "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY")
+		assert.Equal(t, buyAction.FromToken, globals.WSOL)
+		assert.Equal(t, buyAction.ToTokenAmount, uint64(12023935360031))
+		assert.Equal(t, buyAction.FromTokenAmount, uint64(393794276))
+		assert.Equal(t, buyAction.FeeAmount, uint64(3937942))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+
 }
 
 func TestPumpFunCreate_0(t *testing.T) {
