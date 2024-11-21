@@ -1,6 +1,9 @@
 package solana
 
 import (
+	"github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6"
+	JupiterAggregatorV6 "github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6/parsers"
+
 	"github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg"
 	U6m2CDdhRgParsers "github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
@@ -42,6 +45,8 @@ func router(result *types.ParsedResult, instructionIdx int) (action types.Action
 		return JupiterDCA.InstructionRouter(result, instruction)
 	case raydiumLiquidityPoolV4.Program:
 		return RaydiumLiquidityPoolV4.InstructionRouter(result, instruction, instructionIdx)
+	case jupiterAggregatorV6.Program:
+		return JupiterAggregatorV6.InstructionRouter(result, instruction)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{

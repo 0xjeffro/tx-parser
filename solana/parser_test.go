@@ -1,6 +1,7 @@
 package solana
 
 import (
+	"github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -552,5 +553,25 @@ func TestRaydiumLiquidityPoolV4Swap_1(t *testing.T) {
 		assert.Equal(t, swapAction.MinimumAmountOut, uint64(36196423957))
 	} else {
 		t.Errorf("Error type assertion")
+	}
+}
+
+func TestJupiterAggregatorV6SharedAccountRoute_1(t *testing.T) {
+	byteValue, err := readJsonFile("data/jupiterAggregatorV6_sharedAccountsRoute_1.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+
+	if swapAction, ok := action.(*types.JupiterAggregatorV6SharedAccountRouteAction); ok {
+		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
+		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "SharedAccountsRoute")
+		assert.Equal(t, swapAction.Who, "AVYG9UHetNHT1FEDPLv9pN2sCCH4CLsjvkzGjVXBfEiS")
+		assert.Equal(t, swapAction.FromToken, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(100000000))
+		assert.Equal(t, swapAction.ToToken, "oreoN2tQbHXVaZsr3pf66A48miqcBXCDJozganhEJgz")
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(944945170))
 	}
 }
