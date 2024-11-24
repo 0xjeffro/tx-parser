@@ -1,6 +1,7 @@
 package parsers
 
 import (
+	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
 	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
@@ -77,16 +78,42 @@ func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Ins
 		}
 	}
 
+	var fromTokenDecimals, toTokenDecimals uint64
+	if fromToken == globals.WSOL {
+		fromTokenDecimals = globals.SOLDecimals
+	}
+	if toToken == globals.WSOL {
+		toTokenDecimals = globals.SOLDecimals
+	}
+
+	var tokenBalances []types.TokenBalance
+	tokenBalances = append(tokenBalances, result.RawTx.Meta.PreTokenBalances...)
+	tokenBalances = append(tokenBalances, result.RawTx.Meta.PostTokenBalances...)
+
+	for _, tokenBalance := range tokenBalances {
+		if fromTokenDecimals != 0 && toTokenDecimals != 0 {
+			break
+		}
+		if fromToken == tokenBalance.Mint {
+			fromTokenDecimals = tokenBalance.UITokenAmount.Decimals
+		}
+		if toToken == tokenBalance.Mint {
+			toTokenDecimals = tokenBalance.UITokenAmount.Decimals
+		}
+	}
+
 	return &types.JupiterAggregatorV6SharedAccountRouteAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     jupiterAggregatorV6.ProgramName,
 			InstructionName: "SharedAccountsRoute",
 		},
-		Who:             user,
-		FromToken:       fromToken,
-		FromTokenAmount: fromTokenAmount,
-		ToToken:         toToken,
-		ToTokenAmount:   toTokenAmount,
+		Who:               user,
+		FromToken:         fromToken,
+		FromTokenAmount:   fromTokenAmount,
+		FromTokenDecimals: fromTokenDecimals,
+		ToToken:           toToken,
+		ToTokenAmount:     toTokenAmount,
+		ToTokenDecimals:   toTokenDecimals,
 	}, nil
 }

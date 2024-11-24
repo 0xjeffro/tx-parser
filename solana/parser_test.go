@@ -571,7 +571,9 @@ func TestJupiterAggregatorV6SharedAccountRoute_1(t *testing.T) {
 		assert.Equal(t, swapAction.Who, "AVYG9UHetNHT1FEDPLv9pN2sCCH4CLsjvkzGjVXBfEiS")
 		assert.Equal(t, swapAction.FromToken, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
 		assert.Equal(t, swapAction.FromTokenAmount, uint64(100000000))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(6))
 		assert.Equal(t, swapAction.ToToken, "oreoN2tQbHXVaZsr3pf66A48miqcBXCDJozganhEJgz")
 		assert.Equal(t, swapAction.ToTokenAmount, uint64(944945170))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(9))
 	}
 }
