@@ -578,6 +578,28 @@ func TestJupiterAggregatorV6SharedAccountRoute_1(t *testing.T) {
 	}
 }
 
+func TestJupiterAggregatorV6SharedAccountRoute_2(t *testing.T) {
+	byteValue, err := readJsonFile("data/jupiterAggregatorV6_sharedAccountsRoute_2.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[2]
+
+	if swapAction, ok := action.(*types.JupiterAggregatorV6SharedAccountRouteAction); ok {
+		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
+		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "SharedAccountsRoute")
+		assert.Equal(t, swapAction.Who, "GKj54MVFppoYsxPU9jMn7CMniVRAuveFadyTtFhn1vXy")
+		assert.Equal(t, swapAction.FromToken, "CMjfdovtzmgRsnhE1cCzdwDFGKt1UzZB4oCGQchQpump")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(634862142081))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(6))
+		assert.Equal(t, swapAction.ToToken, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(47461249))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(6))
+	}
+}
+
 func TestJupiterAggregatorV6Route_1(t *testing.T) {
 	byteValue, err := readJsonFile("data/jupiterAggregatorV6_Route_1.json")
 	if err != nil {
