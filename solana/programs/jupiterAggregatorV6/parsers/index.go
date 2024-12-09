@@ -15,7 +15,7 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	discriminator := *(*[8]byte)(decode[:8])
 
 	switch discriminator {
-	case jupiterAggregatorV6.SharedAccountsRoute:
+	case jupiterAggregatorV6.SharedAccountsRouteDiscriminator:
 		return SharedAccountsRouteParser(result, instruction, decode)
 	default:
 		return types.UnknownAction{
