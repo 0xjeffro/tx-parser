@@ -25,7 +25,7 @@ func TxParser(tx types.RawTx) *types.ParsedResult {
 	result = *getAccountList(&result)                                               // get account list
 	result.Actions = make([]types.Action, len(tx.Transaction.Message.Instructions)) // init actions
 
-	for i, _ := range tx.Transaction.Message.Instructions {
+	for i := range tx.Transaction.Message.Instructions {
 		action, err := router(&result, i)
 		if err != nil {
 			result.Actions[i] = types.UnknownAction{
