@@ -10,7 +10,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.JupiterAggregatorV6SharedAccountRouteAction, error) {
+func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Instruction) (*types.JupiterAggregatorV6SharedAccountRouteAction, error) {
 	user := result.AccountList[instruction.Accounts[2]]
 	fromTokenAccount := result.AccountList[instruction.Accounts[3]]
 	toTokenAccount := result.AccountList[instruction.Accounts[6]]

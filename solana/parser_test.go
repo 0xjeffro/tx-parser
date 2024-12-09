@@ -577,3 +577,47 @@ func TestJupiterAggregatorV6SharedAccountRoute_1(t *testing.T) {
 		assert.Equal(t, swapAction.ToTokenDecimals, uint64(9))
 	}
 }
+
+func TestJupiterAggregatorV6Route_1(t *testing.T) {
+	byteValue, err := readJsonFile("data/jupiterAggregatorV6_Route_1.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[5]
+
+	if swapAction, ok := action.(*types.JupiterAggregatorV6RouteAction); ok {
+		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
+		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "Route")
+		assert.Equal(t, swapAction.Who, "3huskHPRJXT5pL6RW57HaA8pXRFojx6gfNVGL9cJ2vtB")
+		assert.Equal(t, swapAction.FromToken, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(400000000))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(9))
+		assert.Equal(t, swapAction.ToToken, "3p7eCgdQx1RiJUfr4t7Z8w6DpVbP7CMa9Z6Ff69tpump")
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(3861519639304))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(6))
+	}
+}
+
+func TestJupiterAggregatorV6Route_2(t *testing.T) {
+	byteValue, err := readJsonFile("data/jupiterAggregatorV6_Route_2.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+
+	if swapAction, ok := action.(*types.JupiterAggregatorV6RouteAction); ok {
+		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
+		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "Route")
+		assert.Equal(t, swapAction.Who, "63EazyqF9nJN8SdGTMUaLrRKxS3XnmUiFuDp5KZ9wEV8")
+		assert.Equal(t, swapAction.FromToken, "8SgNwESovnbG1oNEaPVhg6CR9mTMSK7jPvcYRe3wpump")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(100000000))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(6))
+		assert.Equal(t, swapAction.ToToken, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(12309272))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(9))
+	}
+}
