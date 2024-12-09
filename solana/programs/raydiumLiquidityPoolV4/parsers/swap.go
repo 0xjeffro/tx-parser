@@ -1,6 +1,7 @@
 package parsers
 
 import (
+	"fmt"
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
@@ -21,12 +22,15 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, instr
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println(swapData)
 
 	var fromToken, toToken string = globals.WSOL, globals.WSOL
 	var fromTokenDecimals, toTokenDecimals uint64 = globals.SOLDecimals, globals.SOLDecimals
 
-	userSourceTokenAccount := result.AccountList[instruction.Accounts[15]]
-	userDestinationTokenAccount := result.AccountList[instruction.Accounts[16]]
+	accountsLen := len(instruction.Accounts)
+	who := result.AccountList[instruction.Accounts[accountsLen-1]]
+	userSourceTokenAccount := result.AccountList[instruction.Accounts[accountsLen-3]]
+	userDestinationTokenAccount := result.AccountList[instruction.Accounts[accountsLen-2]]
 
 	tokenBalances := append([]types.TokenBalance{}, result.RawTx.Meta.PreTokenBalances[:]...)
 	tokenBalances = append(tokenBalances, result.RawTx.Meta.PostTokenBalances[:]...)
@@ -72,7 +76,7 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, instr
 			ProgramName:     raydiumLiquidityPoolV4.ProgramName,
 			InstructionName: "Swap",
 		},
-		Who:               result.AccountList[instruction.Accounts[17]],
+		Who:               who,
 		FromToken:         fromToken,
 		FromTokenAmount:   swapData.AmountIn,
 		FromTokenDecimals: fromTokenDecimals,

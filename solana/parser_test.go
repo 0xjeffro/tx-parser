@@ -1,6 +1,7 @@
 package solana
 
 import (
+	"fmt"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6"
 	"io/ioutil"
 	"os"
@@ -551,6 +552,33 @@ func TestRaydiumLiquidityPoolV4Swap_1(t *testing.T) {
 		assert.Equal(t, swapAction.ToTokenAmount, uint64(43045438075))
 		assert.Equal(t, swapAction.ToTokenDecimals, uint64(6))
 		assert.Equal(t, swapAction.MinimumAmountOut, uint64(36196423957))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestRaydiumLiquidityPoolV4Swap_2(t *testing.T) {
+	byteValue, err := readJsonFile("data/raydiumLiquidityPoolV4_swap_2.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+
+	fmt.Println(action)
+
+	if swapAction, ok := action.(*types.RaydiumLiquidityPoolV4SwapAction); ok {
+		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
+		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "Swap")
+		assert.Equal(t, swapAction.Who, "orcACRJYTFjTeo2pV8TfYRTpmqfoYgbVi9GeANXTCc8")
+		assert.Equal(t, swapAction.FromToken, "AaJ6gmTzaQw9zxfK6BD9N89wzZLuSuwTRbi8YrTCpump")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(22254340082))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(6))
+		assert.Equal(t, swapAction.ToToken, globals.WSOL)
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(2615124))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(globals.SOLDecimals))
+		assert.Equal(t, swapAction.MinimumAmountOut, uint64(1))
 	} else {
 		t.Errorf("Error type assertion")
 	}
