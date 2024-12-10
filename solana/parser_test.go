@@ -2,13 +2,13 @@ package solana
 
 import (
 	"fmt"
+	"github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6"
 	"io/ioutil"
 	"os"
 	"testing"
 
 	"github.com/0xjeffro/tx-parser/solana/globals"
-	"github.com/0xjeffro/tx-parser/solana/programs/U6m2CDdhRg"
 	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiterDCA"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
@@ -329,52 +329,6 @@ func TestTokenProgramInitializeAccount(t *testing.T) {
 	}
 }
 
-func TestU6m2CDdhRgSwap(t *testing.T) {
-	byteValue, err := readJsonFile("data/U6m2CDdhRg_swap_0.json")
-	if err != nil {
-		t.Errorf("Error reading JSON file: %v", err)
-	}
-	results, _ := Parser(byteValue)
-	action := results[0].Actions[3]
-
-	if transferAction, ok := action.(*types.U6m2CDdhRgSwapAction); ok {
-		assert.Equal(t, transferAction.ProgramID, U6m2CDdhRg.Program)
-		assert.Equal(t, transferAction.ProgramName, U6m2CDdhRg.ProgramName)
-		assert.Equal(t, transferAction.InstructionName, "Unknown")
-		assert.Equal(t, transferAction.FromToken, "7atgF8KQo4wJrD5ATGX7t1V2zVvykPJbFfNeVf1icFv1")
-		assert.Equal(t, transferAction.FromTokenAmount, uint64(358800))
-		assert.Equal(t, transferAction.FromTokenDecimals, uint64(2))
-		assert.Equal(t, transferAction.ToToken, "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY")
-		assert.Equal(t, transferAction.ToTokenAmount, uint64(74619))
-		assert.Equal(t, transferAction.ToTokenDecimals, uint64(6))
-	} else {
-		t.Errorf("Error type assertion")
-	}
-}
-
-func TestU6m2CDdhRgSwap1(t *testing.T) {
-	byteValue, err := readJsonFile("data/U6m2CDdhRg_swap_1.json")
-	if err != nil {
-		t.Errorf("Error reading JSON file: %v", err)
-	}
-	results, _ := Parser(byteValue)
-	action := results[0].Actions[7]
-
-	if transferAction, ok := action.(*types.U6m2CDdhRgSwapAction); ok {
-		assert.Equal(t, transferAction.ProgramID, U6m2CDdhRg.Program)
-		assert.Equal(t, transferAction.ProgramName, U6m2CDdhRg.ProgramName)
-		assert.Equal(t, transferAction.InstructionName, "Unknown")
-		assert.Equal(t, transferAction.FromToken, "So11111111111111111111111111111111111111112")
-		assert.Equal(t, transferAction.FromTokenAmount, uint64(10000000000))
-		assert.Equal(t, transferAction.FromTokenDecimals, uint64(9))
-		assert.Equal(t, transferAction.ToToken, "KMnDBXcPXoz6oMJW5XG4tXdwSWpmWEP2RQM1Uujpump")
-		assert.Equal(t, transferAction.ToTokenAmount, uint64(998528432013))
-		assert.Equal(t, transferAction.ToTokenDecimals, uint64(6))
-	} else {
-		t.Errorf("Error type assertion")
-	}
-}
-
 func TestJupiterDcaOpenDcaV2_0(t *testing.T) {
 	byteValue, err := readJsonFile("data/jupiterDca_openDcaV2_0.json")
 	if err != nil {
@@ -669,5 +623,75 @@ func TestJupiterAggregatorV6Route_2(t *testing.T) {
 		assert.Equal(t, swapAction.ToToken, "So11111111111111111111111111111111111111112")
 		assert.Equal(t, swapAction.ToTokenAmount, uint64(12309272))
 		assert.Equal(t, swapAction.ToTokenDecimals, uint64(9))
+	}
+}
+
+func TestOKXDEXCommissionSplProxySwap_1(t *testing.T) {
+	byteValue, err := readJsonFile("data/OKXDEX_commissionSplProxySwap.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+
+	if swapAction, ok := action.(*OKXDEXAggregationRouterV2.CommissionSplProxySwapAction); ok {
+		assert.Equal(t, swapAction.ProgramID, OKXDEXAggregationRouterV2.Program)
+		assert.Equal(t, swapAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "CommissionSplProxySwap")
+		assert.Equal(t, swapAction.Who, "GKj54MVFppoYsxPU9jMn7CMniVRAuveFadyTtFhn1vXy")
+		assert.Equal(t, swapAction.FromToken, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(250000000))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(6))
+		assert.Equal(t, swapAction.ToToken, "DKu9kykSfbN5LBfFXtNNDPaX35o4Fv6vJ9FKk7pZpump")
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(6373264828))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(6))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestOKXDEXSwap(t *testing.T) {
+	byteValue, err := readJsonFile("data/OKXDEX_swap_0.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[3]
+
+	if transferAction, ok := action.(*OKXDEXAggregationRouterV2.SwapAction); ok {
+		assert.Equal(t, transferAction.ProgramID, OKXDEXAggregationRouterV2.Program)
+		assert.Equal(t, transferAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+		assert.Equal(t, transferAction.InstructionName, "Swap")
+		assert.Equal(t, transferAction.FromToken, "7atgF8KQo4wJrD5ATGX7t1V2zVvykPJbFfNeVf1icFv1")
+		assert.Equal(t, transferAction.FromTokenAmount, uint64(358800))
+		assert.Equal(t, transferAction.FromTokenDecimals, uint64(2))
+		assert.Equal(t, transferAction.ToToken, "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY")
+		assert.Equal(t, transferAction.ToTokenAmount, uint64(74619))
+		assert.Equal(t, transferAction.ToTokenDecimals, uint64(6))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestOKXDEXSwap_1(t *testing.T) {
+	byteValue, err := readJsonFile("data/OKXDEX_swap_1.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[7]
+
+	if transferAction, ok := action.(*OKXDEXAggregationRouterV2.SwapAction); ok {
+		assert.Equal(t, transferAction.ProgramID, OKXDEXAggregationRouterV2.Program)
+		assert.Equal(t, transferAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+		assert.Equal(t, transferAction.InstructionName, "Swap")
+		assert.Equal(t, transferAction.FromToken, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, transferAction.FromTokenAmount, uint64(10000000000))
+		assert.Equal(t, transferAction.FromTokenDecimals, uint64(9))
+		assert.Equal(t, transferAction.ToToken, "KMnDBXcPXoz6oMJW5XG4tXdwSWpmWEP2RQM1Uujpump")
+		assert.Equal(t, transferAction.ToTokenAmount, uint64(998528432013))
+		assert.Equal(t, transferAction.ToTokenDecimals, uint64(6))
+	} else {
+		t.Errorf("Error type assertion")
 	}
 }
