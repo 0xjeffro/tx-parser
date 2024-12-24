@@ -22,7 +22,7 @@ func Parser(rpcData []byte) ([]types.ParsedResult, error) {
 func TxParser(tx types.RawTx) *types.ParsedResult {
 	var result types.ParsedResult
 	result.RawTx = tx                                                               // set raw tx
-	result = *getAccountList(&result)                                               // get account list
+	result = *GetAccountList(&result)                                               // get account list
 	result.Actions = make([]types.Action, len(tx.Transaction.Message.Instructions)) // init actions
 
 	for i := range tx.Transaction.Message.Instructions {
