@@ -21,6 +21,21 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 		return SellParser(result, instruction, decode)
 	case pumpfun.CreateDiscriminator:
 		return CreateParser(result, instruction, decode)
+	case pumpfun.AnchorSelfCPILogDiscriminator:
+		subDiscriminator := *(*[8]byte)(decode[8:16])
+		switch subDiscriminator {
+		case pumpfun.AnchorSelfCPILogSwapDiscriminator:
+			return AnchorSelfCPILogSwapParser(decode)
+		default:
+			return types.UnknownAction{
+				BaseAction: types.BaseAction{
+					ProgramID:       result.AccountList[instruction.ProgramIDIndex],
+					ProgramName:     pumpfun.ProgramName,
+					InstructionName: "AnchorSelfCPILog Unknown",
+				},
+			}, nil
+		}
+
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{

@@ -20,6 +20,7 @@ type Instruction struct {
 	Accounts       []int  `json:"accounts"`
 	Data           string `json:"data"`
 	ProgramIDIndex int    `json:"programIdIndex"`
+	StackHeight    *int   `json:"stackHeight"`
 }
 type InnerInstructions struct {
 	Index        int           `json:"index"`

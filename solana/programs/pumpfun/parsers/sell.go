@@ -4,6 +4,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/mr-tron/base58"
 	"github.com/near/borsh-go"
 )
 
@@ -20,6 +21,47 @@ func SellParser(result *types.ParsedResult, instruction types.Instruction, decod
 		return nil, err
 	}
 
+	var instructionIndex int
+	for idx, instr := range result.RawTx.Transaction.Message.Instructions {
+		if result.AccountList[instr.ProgramIDIndex] == pumpfun.Program && instr.Data == instruction.Data {
+			instructionIndex = idx
+			break
+		}
+	}
+
+	var instructions []types.Instruction
+	for _, innerInstruction := range result.RawTx.Meta.InnerInstructions {
+		if innerInstruction.Index == instructionIndex {
+			instructions = innerInstruction.Instructions
+			break
+		}
+	}
+
+	sellTokenAmount := uint64(0)
+	sellSolAmount := uint64(0)
+
+	for _, instr := range instructions {
+		programId := result.AccountList[instr.ProgramIDIndex]
+		if programId == pumpfun.Program {
+			data := instr.Data
+			decode, err := base58.Decode(data)
+			if err != nil {
+				return nil, err
+			}
+			discriminator := *(*[16]byte)(decode[:16])
+			mergedDiscriminator := make([]byte, 0, 16)
+			mergedDiscriminator = append(mergedDiscriminator[:], pumpfun.AnchorSelfCPILogDiscriminator[:]...)
+			mergedDiscriminator = append(mergedDiscriminator[:], pumpfun.AnchorSelfCPILogSwapDiscriminator[:]...)
+			if discriminator == *(*[16]byte)(mergedDiscriminator[:]) {
+				action, err := AnchorSelfCPILogSwapParser(decode)
+				if err == nil {
+					sellTokenAmount = action.TokenAmount
+					sellSolAmount = action.SolAmount
+				}
+			}
+		}
+	}
+
 	action := types.PumpFunSellAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       pumpfun.Program,
@@ -29,8 +71,9 @@ func SellParser(result *types.ParsedResult, instruction types.Instruction, decod
 		Who:             result.AccountList[instruction.Accounts[6]],
 		FromToken:       result.AccountList[instruction.Accounts[2]],
 		ToToken:         globals.WSOL,
-		FromTokenAmount: sellData.Amount,
-		ToTokenAmount:   sellData.MinSolOutput,
+		FromTokenAmount: sellTokenAmount,
+		ToTokenAmount:   sellSolAmount,
+		MinSolOutput:    sellData.MinSolOutput,
 	}
 	return &action, nil
 }

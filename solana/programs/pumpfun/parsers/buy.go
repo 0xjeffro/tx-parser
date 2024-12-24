@@ -3,9 +3,8 @@ package parsers
 import (
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
-	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
-	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/mr-tron/base58"
 	"github.com/near/borsh-go"
 )
 
@@ -38,30 +37,28 @@ func BuyParser(result *types.ParsedResult, instruction types.Instruction, decode
 		}
 	}
 
-	feeRecipient := result.AccountList[instruction.Accounts[1]]
-	bondingCurve := result.AccountList[instruction.Accounts[3]]
-
-	feeAmount := uint64(0)
 	buyTokenAmount := uint64(0)
+	buySolAmount := uint64(0)
 
 	for _, instr := range instructions {
 		programId := result.AccountList[instr.ProgramIDIndex]
-		switch programId {
-		case systemProgram.Program:
-			parsedData, err := SystemProgramParsers.InstructionRouter(result, instr)
+		if programId == pumpfun.Program {
+			data := instr.Data
+			decode, err := base58.Decode(data)
 			if err != nil {
-				continue
+				return nil, err
 			}
-			switch p := parsedData.(type) {
-			case *types.SystemProgramTransferAction:
-				if p.To == feeRecipient {
-					feeAmount += p.Lamports
-				} else if p.To == bondingCurve {
-					buyTokenAmount += p.Lamports
+			discriminator := *(*[16]byte)(decode[:16])
+			mergedDiscriminator := make([]byte, 0, 16)
+			mergedDiscriminator = append(mergedDiscriminator[:], pumpfun.AnchorSelfCPILogDiscriminator[:]...)
+			mergedDiscriminator = append(mergedDiscriminator[:], pumpfun.AnchorSelfCPILogSwapDiscriminator[:]...)
+			if discriminator == *(*[16]byte)(mergedDiscriminator[:]) {
+				action, err := AnchorSelfCPILogSwapParser(decode)
+				if err == nil {
+					buyTokenAmount = action.TokenAmount
+					buySolAmount = action.SolAmount
 				}
 			}
-		default:
-			continue
 		}
 	}
 
@@ -74,9 +71,9 @@ func BuyParser(result *types.ParsedResult, instruction types.Instruction, decode
 		Who:             result.AccountList[instruction.Accounts[6]],
 		ToToken:         result.AccountList[instruction.Accounts[2]],
 		FromToken:       globals.WSOL,
-		ToTokenAmount:   buyData.Amount,
-		FromTokenAmount: buyTokenAmount,
-		FeeAmount:       feeAmount,
+		ToTokenAmount:   buyTokenAmount,
+		FromTokenAmount: buySolAmount,
+		MaxSolCost:      buyData.MaxSolCost,
 	}
 
 	return &action, nil
