@@ -43,7 +43,7 @@ func TxParser(tx types.RawTx) *types.ParsedResult {
 	return &result
 }
 
-func getAccountList(result *types.ParsedResult) *types.ParsedResult {
+func GetAccountList(result *types.ParsedResult) *types.ParsedResult {
 	length := len(result.RawTx.Transaction.Message.AccountKeys) +
 		len(result.RawTx.Meta.LoadedAddresses.Writable) +
 		len(result.RawTx.Meta.LoadedAddresses.Readonly)
