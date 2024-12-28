@@ -517,8 +517,6 @@ func TestRaydiumLiquidityPoolV4Swap_2(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	fmt.Println(action)
-
 	if swapAction, ok := action.(*types.RaydiumLiquidityPoolV4SwapAction); ok {
 		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
 		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
@@ -657,6 +655,7 @@ func TestOKXDEXSwap(t *testing.T) {
 	action := results[0].Actions[3]
 
 	if transferAction, ok := action.(*OKXDEXAggregationRouterV2.SwapAction); ok {
+		fmt.Println(transferAction.InstructionName)
 		assert.Equal(t, transferAction.ProgramID, OKXDEXAggregationRouterV2.Program)
 		assert.Equal(t, transferAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Swap")
@@ -680,6 +679,7 @@ func TestOKXDEXSwap_1(t *testing.T) {
 	action := results[0].Actions[7]
 
 	if transferAction, ok := action.(*OKXDEXAggregationRouterV2.SwapAction); ok {
+		fmt.Println(transferAction.InstructionName)
 		assert.Equal(t, transferAction.ProgramID, OKXDEXAggregationRouterV2.Program)
 		assert.Equal(t, transferAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Swap")
@@ -689,6 +689,30 @@ func TestOKXDEXSwap_1(t *testing.T) {
 		assert.Equal(t, transferAction.ToToken, "KMnDBXcPXoz6oMJW5XG4tXdwSWpmWEP2RQM1Uujpump")
 		assert.Equal(t, transferAction.ToTokenAmount, uint64(998528432013))
 		assert.Equal(t, transferAction.ToTokenDecimals, uint64(6))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestOKXDEXSwap_2(t *testing.T) {
+	byteValue, err := readJsonFile("data/OKXDEX_swap_2.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[4]
+
+	if transferAction, ok := action.(*OKXDEXAggregationRouterV2.SwapAction); ok {
+		fmt.Println(transferAction.InstructionName)
+		assert.Equal(t, transferAction.ProgramID, OKXDEXAggregationRouterV2.Program)
+		assert.Equal(t, transferAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+		assert.Equal(t, transferAction.InstructionName, "Swap")
+		assert.Equal(t, transferAction.FromToken, "HjhCs97TBaJBfaJf3ukzs8CEsGApYjgz88wrhdTPpump")
+		assert.Equal(t, transferAction.FromTokenAmount, uint64(58882325154))
+		assert.Equal(t, transferAction.FromTokenDecimals, uint64(6))
+		assert.Equal(t, transferAction.ToToken, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, transferAction.ToTokenAmount, uint64(1173873))
+		assert.Equal(t, transferAction.ToTokenDecimals, uint64(9))
 	} else {
 		t.Errorf("Error type assertion")
 	}

@@ -1,7 +1,6 @@
 package parsers
 
 import (
-	"fmt"
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
@@ -101,9 +100,6 @@ func CommissionSplProxySwapParser(result *types.ParsedResult, instruction types.
 			toTokenDecimals = tokenBalance.UITokenAmount.Decimals
 		}
 	}
-
-	fmt.Println("fromTokenAmount: ", fromTokenAmount)
-	fmt.Println("toTokenAmount: ", toTokenAmount)
 
 	action := OKXDEXAggregationRouterV2.CommissionSplProxySwapAction{
 		BaseAction: types.BaseAction{
