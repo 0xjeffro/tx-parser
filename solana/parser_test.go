@@ -717,3 +717,27 @@ func TestOKXDEXSwap_2(t *testing.T) {
 		t.Errorf("Error type assertion")
 	}
 }
+
+func TestOKXDEXCommissionSolSwap(t *testing.T) {
+	byteValue, err := readJsonFile("data/OKXDEX_commissionSolSwap2.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[7]
+
+	if swapAction, ok := action.(*OKXDEXAggregationRouterV2.CommissionSolSwap2Action); ok {
+		assert.Equal(t, swapAction.ProgramID, OKXDEXAggregationRouterV2.Program)
+		assert.Equal(t, swapAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "CommissionSolSwap2")
+		assert.Equal(t, swapAction.Who, "AG27WXxPym3K73JFKtpRxwbMfnRnuPu5bn6juzcvq5rp")
+		assert.Equal(t, swapAction.FromToken, "So11111111111111111111111111111111111111112")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(63629071))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(9))
+		assert.Equal(t, swapAction.ToToken, "28ECNMKBj66GMBJxq1c3VyzJiKY5gDp2sEYc92Ybpump")
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(5238716646))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(6))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}

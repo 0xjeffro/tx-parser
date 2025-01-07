@@ -19,6 +19,9 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 		return CommissionSplProxySwapParser(result, instruction)
 	case OKXDEXAggregationRouterV2.SwapDiscriminator:
 		return SwapParser(result, instruction, decode)
+	case OKXDEXAggregationRouterV2.CommissionSolSwap2Discriminator:
+		return CommissionSolSwap2Parser(result, instruction)
+
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
