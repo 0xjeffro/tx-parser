@@ -44,7 +44,7 @@ func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Ins
 				continue
 			}
 			switch p := parsedData.(type) {
-			case *types.SystemProgramTransferAction:
+			case *systemProgram.TransferAction:
 				if p.From == fromTokenAccount {
 					fromTokenAmount += p.Lamports
 				}

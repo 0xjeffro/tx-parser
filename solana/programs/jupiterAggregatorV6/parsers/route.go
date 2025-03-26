@@ -51,7 +51,7 @@ func RouteParser(result *types.ParsedResult, instruction types.Instruction) (*ty
 				continue
 			}
 			switch p := parsedData.(type) {
-			case *types.SystemProgramTransferAction:
+			case *systemProgram.TransferAction:
 				if p.From == fromTokenAccount {
 					fromTokenAmount += p.Lamports
 				}

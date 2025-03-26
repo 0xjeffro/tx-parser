@@ -11,14 +11,14 @@ type TransferData struct {
 	Lamports      uint64
 }
 
-func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.SystemProgramTransferAction, error) {
+func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*systemProgram.TransferAction, error) {
 	var data TransferData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.SystemProgramTransferAction{
+	action := systemProgram.TransferAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     systemProgram.ProgramName,

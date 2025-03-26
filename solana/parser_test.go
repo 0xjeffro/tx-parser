@@ -233,7 +233,7 @@ func TestSystemProgramTransfer(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[1]
-	if transferAction, ok := action.(*types.SystemProgramTransferAction); ok {
+	if transferAction, ok := action.(*systemProgram.TransferAction); ok {
 		assert.Equal(t, transferAction.ProgramID, systemProgram.Program)
 		assert.Equal(t, transferAction.ProgramName, systemProgram.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Transfer")
@@ -252,7 +252,7 @@ func TestSystemProgramCreateAccountWithSeed(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[2]
-	if transferAction, ok := action.(*types.SystemProgramCreateAccountWithSeedAction); ok {
+	if transferAction, ok := action.(*systemProgram.CreateAccountWithSeedAction); ok {
 		assert.Equal(t, transferAction.ProgramID, systemProgram.Program)
 		assert.Equal(t, transferAction.ProgramName, systemProgram.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "CreateAccountWithSeed")

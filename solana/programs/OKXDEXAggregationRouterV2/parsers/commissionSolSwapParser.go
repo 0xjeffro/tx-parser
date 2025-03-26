@@ -52,7 +52,7 @@ func CommissionSolSwap2Parser(result *types.ParsedResult, instruction types.Inst
 				continue
 			}
 			switch p := parsedData.(type) {
-			case *types.SystemProgramTransferAction:
+			case *systemProgram.TransferAction:
 				if p.From == fromTokenAccount {
 					fromTokenAmount += p.Lamports
 				}

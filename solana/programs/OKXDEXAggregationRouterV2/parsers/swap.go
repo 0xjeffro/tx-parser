@@ -46,7 +46,7 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, decod
 				continue
 			}
 			switch p := parsedData.(type) {
-			case *types.SystemProgramTransferAction:
+			case *systemProgram.TransferAction:
 				if p.To == toTokenAccount {
 					toTokenAmount += p.Lamports
 				}
