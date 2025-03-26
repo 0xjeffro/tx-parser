@@ -1,7 +1,9 @@
-package types
+package raydiumLiquidityPoolV4
 
-type RaydiumLiquidityPoolV4SwapAction struct {
-	BaseAction
+import "github.com/0xjeffro/tx-parser/solana/types"
+
+type SwapAction struct {
+	types.BaseAction
 	Who               string `json:"who"`
 	FromToken         string `json:"fromToken"`
 	FromTokenAmount   uint64 `json:"fromTokenAmount"`

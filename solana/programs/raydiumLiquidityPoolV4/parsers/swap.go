@@ -15,7 +15,7 @@ type SwapData struct {
 	MinimumAmountOut uint64
 }
 
-func SwapParser(result *types.ParsedResult, instruction types.Instruction, instructionIdx int, decodedData []byte) (*types.RaydiumLiquidityPoolV4SwapAction, error) {
+func SwapParser(result *types.ParsedResult, instruction types.Instruction, instructionIdx int, decodedData []byte) (*raydiumLiquidityPoolV4.SwapAction, error) {
 	var swapData SwapData
 	err := borsh.Deserialize(&swapData, decodedData)
 	if err != nil {
@@ -68,7 +68,7 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, instr
 		}
 	}
 
-	action := types.RaydiumLiquidityPoolV4SwapAction{
+	action := raydiumLiquidityPoolV4.SwapAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       raydiumLiquidityPoolV4.Program,
 			ProgramName:     raydiumLiquidityPoolV4.ProgramName,

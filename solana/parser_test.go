@@ -471,7 +471,7 @@ func TestRaydiumLiquidityPoolV4Swap_0(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[4]
 
-	if swapAction, ok := action.(*types.RaydiumLiquidityPoolV4SwapAction); ok {
+	if swapAction, ok := action.(*raydiumLiquidityPoolV4.SwapAction); ok {
 		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
 		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Swap")
@@ -496,7 +496,7 @@ func TestRaydiumLiquidityPoolV4Swap_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[4]
 
-	if swapAction, ok := action.(*types.RaydiumLiquidityPoolV4SwapAction); ok {
+	if swapAction, ok := action.(*raydiumLiquidityPoolV4.SwapAction); ok {
 		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
 		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Swap")
@@ -521,7 +521,7 @@ func TestRaydiumLiquidityPoolV4Swap_2(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if swapAction, ok := action.(*types.RaydiumLiquidityPoolV4SwapAction); ok {
+	if swapAction, ok := action.(*raydiumLiquidityPoolV4.SwapAction); ok {
 		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
 		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Swap")
