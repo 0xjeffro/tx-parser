@@ -276,7 +276,7 @@ func TestTokenProgramTransfer(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if transferAction, ok := action.(*types.TokenProgramTransferAction); ok {
+	if transferAction, ok := action.(*tokenProgram.TransferAction); ok {
 		assert.Equal(t, transferAction.ProgramID, tokenProgram.Program)
 		assert.Equal(t, transferAction.ProgramName, tokenProgram.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Transfer")
@@ -296,7 +296,7 @@ func TestTokenProgramTransferChecked(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if transferAction, ok := action.(*types.TokenProgramTransferCheckedAction); ok {
+	if transferAction, ok := action.(*tokenProgram.TransferCheckedAction); ok {
 		assert.Equal(t, transferAction.ProgramID, tokenProgram.Program)
 		assert.Equal(t, transferAction.ProgramName, tokenProgram.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "TransferChecked")
@@ -318,7 +318,7 @@ func TestTokenProgramInitializeAccount(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if initAction, ok := action.(*types.TokenProgramInitializeAccountAction); ok {
+	if initAction, ok := action.(*tokenProgram.InitializeAccountAction); ok {
 		assert.Equal(t, initAction.ProgramID, tokenProgram.Program)
 		assert.Equal(t, initAction.ProgramName, tokenProgram.ProgramName)
 		assert.Equal(t, initAction.InstructionName, "InitializeAccount")

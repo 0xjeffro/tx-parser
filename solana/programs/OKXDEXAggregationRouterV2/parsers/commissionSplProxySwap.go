@@ -66,14 +66,14 @@ func CommissionSplProxySwapParser(result *types.ParsedResult, instruction types.
 				continue
 			}
 			switch p := parsedData.(type) {
-			case *types.TokenProgramTransferAction:
+			case *tokenProgram.TransferAction:
 				if p.From == fromTokenAccount {
 					fromTokenAmount += p.Amount
 				}
 				if p.To == toTokenAccount {
 					toTokenAmount += p.Amount
 				}
-			case *types.TokenProgramTransferCheckedAction:
+			case *tokenProgram.TransferCheckedAction:
 				if p.From == fromTokenAccount {
 					fromTokenAmount += p.Amount
 				}

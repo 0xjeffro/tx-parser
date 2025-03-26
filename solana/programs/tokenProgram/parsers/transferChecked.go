@@ -7,7 +7,7 @@ import (
 	"github.com/near/borsh-go"
 )
 
-func TransferCheckedParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.TokenProgramTransferCheckedAction, error) {
+func TransferCheckedParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*tokenProgram.TransferCheckedAction, error) {
 	var data TransferData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
@@ -18,7 +18,7 @@ func TransferCheckedParser(result *types.ParsedResult, instruction types.Instruc
 	fromTokenAccount := result.AccountList[instruction.Accounts[0]]
 	mint := result.AccountList[instruction.Accounts[1]]
 	toTokenAccount := result.AccountList[instruction.Accounts[2]]
-	action := types.TokenProgramTransferCheckedAction{
+	action := tokenProgram.TransferCheckedAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       tokenProgram.Program,
 			ProgramName:     tokenProgram.ProgramName,

@@ -11,14 +11,14 @@ type TransferData struct {
 	Amount        uint64
 }
 
-func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.TokenProgramTransferAction, error) {
+func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*tokenProgram.TransferAction, error) {
 	var data TransferData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.TokenProgramTransferAction{
+	action := tokenProgram.TransferAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       tokenProgram.Program,
 			ProgramName:     tokenProgram.ProgramName,

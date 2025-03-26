@@ -1,14 +1,16 @@
-package types
+package tokenProgram
 
-type TokenProgramTransferAction struct {
-	BaseAction
+import "github.com/0xjeffro/tx-parser/solana/types"
+
+type TransferAction struct {
+	types.BaseAction
 	From   string `json:"from"`
 	To     string `json:"to"`
 	Amount uint64 `json:"amount"`
 }
 
-type TokenProgramTransferCheckedAction struct {
-	BaseAction
+type TransferCheckedAction struct {
+	types.BaseAction
 	From     string `json:"from"`
 	To       string `json:"to"`
 	Amount   uint64 `json:"amount"`
@@ -16,8 +18,8 @@ type TokenProgramTransferCheckedAction struct {
 	Decimals uint64 `json:"decimals"`
 }
 
-type TokenProgramInitializeAccountAction struct {
-	BaseAction
+type InitializeAccountAction struct {
+	types.BaseAction
 	Account    string `json:"account"`
 	Mint       string `json:"mint"`
 	Owner      string `json:"owner"`

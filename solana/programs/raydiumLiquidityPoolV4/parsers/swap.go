@@ -59,7 +59,7 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, instr
 			if err != nil {
 				continue
 			}
-			transferAction, ok := action.(*types.TokenProgramTransferAction)
+			transferAction, ok := action.(*tokenProgram.TransferAction)
 			if ok {
 				if transferAction.To == userDestinationTokenAccount {
 					toTokenAmount = transferAction.Amount

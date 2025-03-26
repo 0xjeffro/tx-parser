@@ -5,9 +5,9 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func InitializeAccountParser(result *types.ParsedResult, instruction types.Instruction) (*types.TokenProgramInitializeAccountAction, error) {
+func InitializeAccountParser(result *types.ParsedResult, instruction types.Instruction) (*tokenProgram.InitializeAccountAction, error) {
 
-	action := types.TokenProgramInitializeAccountAction{
+	action := tokenProgram.InitializeAccountAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       tokenProgram.Program,
 			ProgramName:     tokenProgram.ProgramName,
