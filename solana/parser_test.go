@@ -199,7 +199,7 @@ func TestComputeBudgetSetComputeUnitLimit(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
-	if setAction, ok := action.(*types.ComputeBudgetSetComputeUnitLimitAction); ok {
+	if setAction, ok := action.(*computeBudget.SetComputeUnitLimitAction); ok {
 		assert.Equal(t, setAction.ProgramID, computeBudget.Program)
 		assert.Equal(t, setAction.ProgramName, "ComputeBudget")
 		assert.Equal(t, setAction.InstructionName, "SetComputeUnitLimit")
@@ -216,7 +216,7 @@ func TestComputeBudgetSetComputeUnitPrice(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[2]
-	if setAction, ok := action.(*types.ComputeBudgetSetComputeUnitPriceAction); ok {
+	if setAction, ok := action.(*computeBudget.SetComputeUnitPriceAction); ok {
 		assert.Equal(t, setAction.ProgramID, computeBudget.Program)
 		assert.Equal(t, setAction.ProgramName, "ComputeBudget")
 		assert.Equal(t, setAction.InstructionName, "SetComputeUnitPrice")

@@ -11,14 +11,14 @@ type SetComputeUnitPriceData struct {
 	Units         uint64
 }
 
-func SetComputeUnitPriceParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.ComputeBudgetSetComputeUnitPriceAction, error) {
+func SetComputeUnitPriceParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*computeBudget.SetComputeUnitPriceAction, error) {
 	var data SetComputeUnitPriceData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.ComputeBudgetSetComputeUnitPriceAction{
+	action := computeBudget.SetComputeUnitPriceAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     computeBudget.ProgramName,

@@ -11,14 +11,14 @@ type SetComputeUnitLimitData struct {
 	Unit          uint32
 }
 
-func SetComputeUnitLimitParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.ComputeBudgetSetComputeUnitLimitAction, error) {
+func SetComputeUnitLimitParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*computeBudget.SetComputeUnitLimitAction, error) {
 	var data SetComputeUnitLimitData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.ComputeBudgetSetComputeUnitLimitAction{
+	action := computeBudget.SetComputeUnitLimitAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     computeBudget.ProgramName,
