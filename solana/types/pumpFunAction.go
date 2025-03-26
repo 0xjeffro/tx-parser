@@ -8,6 +8,7 @@ type PumpFunBuyAction struct {
 	ToToken         string `json:"toToken"`
 	ToTokenAmount   uint64 `json:"toTokenAmount"`
 	MaxSolCost      uint64 `json:"maxSolCost"`
+	FeeAmount       uint64 `json:"feeAmount"`
 }
 
 type PumpFunSellAction struct {

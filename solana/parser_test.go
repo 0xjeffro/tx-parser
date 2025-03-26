@@ -85,6 +85,7 @@ func TestPumpFunBuy_0(t *testing.T) {
 		assert.Equal(t, buyAction.ToTokenAmount, uint64(56716561396327))
 		assert.Equal(t, buyAction.FromTokenAmount, uint64(3000000000))
 		assert.Equal(t, buyAction.MaxSolCost, uint64(5700000000))
+		assert.Equal(t, buyAction.FeeAmount, uint64(30000000))
 	} else {
 		t.Errorf("Error type assertion")
 	}
@@ -107,6 +108,7 @@ func TestPumpFunBuy_1(t *testing.T) {
 		assert.Equal(t, buyAction.ToTokenAmount, uint64(34612901212710))
 		assert.Equal(t, buyAction.FromTokenAmount, uint64(1000000000))
 		assert.Equal(t, buyAction.MaxSolCost, uint64(1262500000))
+		assert.Equal(t, buyAction.FeeAmount, uint64(10000000))
 	} else {
 		t.Errorf("Error type assertion")
 	}
@@ -128,6 +130,7 @@ func TestPumpFunBuyBundle(t *testing.T) {
 		assert.Equal(t, buyAction.FromToken, globals.WSOL)
 		assert.Equal(t, buyAction.ToTokenAmount, uint64(12373970345963))
 		assert.Equal(t, buyAction.FromTokenAmount, uint64(386100226))
+		assert.Equal(t, buyAction.FeeAmount, uint64(3861002))
 	} else {
 		t.Errorf("Error type assertion")
 	}
@@ -142,6 +145,7 @@ func TestPumpFunBuyBundle(t *testing.T) {
 		assert.Equal(t, buyAction.FromToken, globals.WSOL)
 		assert.Equal(t, buyAction.ToTokenAmount, uint64(12100159018198))
 		assert.Equal(t, buyAction.FromTokenAmount, uint64(386820768))
+		assert.Equal(t, buyAction.FeeAmount, uint64(3868207))
 	} else {
 		t.Errorf("Error type assertion")
 	}
@@ -156,10 +160,10 @@ func TestPumpFunBuyBundle(t *testing.T) {
 		assert.Equal(t, buyAction.FromToken, globals.WSOL)
 		assert.Equal(t, buyAction.ToTokenAmount, uint64(12023935360031))
 		assert.Equal(t, buyAction.FromTokenAmount, uint64(393794276))
+		assert.Equal(t, buyAction.FeeAmount, uint64(3937942))
 	} else {
 		t.Errorf("Error type assertion")
 	}
-
 }
 
 func TestPumpFunCreate_0(t *testing.T) {

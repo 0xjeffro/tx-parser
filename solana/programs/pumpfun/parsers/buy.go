@@ -1,8 +1,11 @@
 package parsers
 
 import (
+	"encoding/binary"
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
+	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
+	systemParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 	"github.com/near/borsh-go"
@@ -29,25 +32,29 @@ func BuyParser(result *types.ParsedResult, instruction types.Instruction, decode
 		}
 	}
 
-	var instructions []types.Instruction
+	var innerInstructions []types.Instruction // get all innerInstructions for this instruction
 	for _, innerInstruction := range result.RawTx.Meta.InnerInstructions {
 		if innerInstruction.Index == instructionIndex {
-			instructions = innerInstruction.Instructions
+			innerInstructions = innerInstruction.Instructions
 			break
 		}
 	}
 
 	buyTokenAmount := uint64(0)
 	buySolAmount := uint64(0)
+	feeAmount := uint64(0)
 
-	for _, instr := range instructions {
+	feeRecipient := result.AccountList[instruction.Accounts[1]]
+
+	for _, instr := range innerInstructions {
 		programId := result.AccountList[instr.ProgramIDIndex]
+		data := instr.Data
+		decode, err := base58.Decode(data)
+		if err != nil {
+			return nil, err
+		}
+
 		if programId == pumpfun.Program {
-			data := instr.Data
-			decode, err := base58.Decode(data)
-			if err != nil {
-				return nil, err
-			}
 			discriminator := *(*[16]byte)(decode[:16])
 			mergedDiscriminator := make([]byte, 0, 16)
 			mergedDiscriminator = append(mergedDiscriminator[:], pumpfun.AnchorSelfCPILogDiscriminator[:]...)
@@ -57,6 +64,16 @@ func BuyParser(result *types.ParsedResult, instruction types.Instruction, decode
 				if err == nil {
 					buyTokenAmount = action.TokenAmount
 					buySolAmount = action.SolAmount
+				}
+			}
+		} else if programId == systemProgram.Program {
+			discriminator := binary.LittleEndian.Uint32(decode[0:4])
+			if discriminator == systemProgram.TransferDiscriminator {
+				action, err := systemParsers.TransferParser(result, instr, decode)
+				if err == nil {
+					if action.To == feeRecipient {
+						feeAmount = action.Lamports
+					}
 				}
 			}
 		}
@@ -74,7 +91,7 @@ func BuyParser(result *types.ParsedResult, instruction types.Instruction, decode
 		ToTokenAmount:   buyTokenAmount,
 		FromTokenAmount: buySolAmount,
 		MaxSolCost:      buyData.MaxSolCost,
+		FeeAmount:       feeAmount,
 	}
-
 	return &action, nil
 }
