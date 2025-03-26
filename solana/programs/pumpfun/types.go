@@ -1,7 +1,9 @@
-package types
+package pumpfun
 
-type PumpFunBuyAction struct {
-	BaseAction
+import "github.com/0xjeffro/tx-parser/solana/types"
+
+type BuyAction struct {
+	types.BaseAction
 	Who             string `json:"who"`
 	FromToken       string `json:"fromToken"`
 	FromTokenAmount uint64 `json:"fromTokenAmount"`
@@ -11,8 +13,8 @@ type PumpFunBuyAction struct {
 	FeeAmount       uint64 `json:"feeAmount"`
 }
 
-type PumpFunSellAction struct {
-	BaseAction
+type SellAction struct {
+	types.BaseAction
 	Who             string `json:"who"`
 	FromToken       string `json:"fromToken"`
 	FromTokenAmount uint64 `json:"fromTokenAmount"`
@@ -21,8 +23,8 @@ type PumpFunSellAction struct {
 	MinSolOutput    uint64 `json:"minSolOutput"`
 }
 
-type PumpFunCreateAction struct {
-	BaseAction
+type CreateAction struct {
+	types.BaseAction
 	Who                    string `json:"who"`
 	Mint                   string `json:"mint"`
 	MintAuthority          string `json:"mintAuthority"`
@@ -36,8 +38,8 @@ type PumpFunCreateAction struct {
 	Uri    string `json:"uri"`
 }
 
-type PumpFunAnchorSelfCPILogSwapAction struct {
-	BaseAction
+type AnchorSelfCPILogSwapAction struct {
+	types.BaseAction
 	Mint                 string `json:"mint"`
 	SolAmount            uint64 `json:"solAmount"`
 	TokenAmount          uint64 `json:"tokenAmount"`

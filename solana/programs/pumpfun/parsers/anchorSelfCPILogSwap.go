@@ -19,14 +19,14 @@ type AnchorSelfCPILogSwapData struct {
 	VirtualTokenReserves uint64
 }
 
-func AnchorSelfCPILogSwapParser(decodedData []byte) (*types.PumpFunAnchorSelfCPILogSwapAction, error) {
+func AnchorSelfCPILogSwapParser(decodedData []byte) (*pumpfun.AnchorSelfCPILogSwapAction, error) {
 	var data AnchorSelfCPILogSwapData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.PumpFunAnchorSelfCPILogSwapAction{
+	action := pumpfun.AnchorSelfCPILogSwapAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       pumpfun.Program,
 			ProgramName:     "pumpfun",

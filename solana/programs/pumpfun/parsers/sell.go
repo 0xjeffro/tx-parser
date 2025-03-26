@@ -14,7 +14,7 @@ type SellData struct {
 	MinSolOutput  uint64
 }
 
-func SellParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.PumpFunSellAction, error) {
+func SellParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*pumpfun.SellAction, error) {
 	var sellData SellData
 	err := borsh.Deserialize(&sellData, decodedData)
 	if err != nil {
@@ -62,7 +62,7 @@ func SellParser(result *types.ParsedResult, instruction types.Instruction, decod
 		}
 	}
 
-	action := types.PumpFunSellAction{
+	action := pumpfun.SellAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       pumpfun.Program,
 			ProgramName:     pumpfun.ProgramName,

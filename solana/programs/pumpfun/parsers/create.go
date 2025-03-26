@@ -13,14 +13,14 @@ type CreateData struct {
 	Uri           string
 }
 
-func CreateParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.PumpFunCreateAction, error) {
+func CreateParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*pumpfun.CreateAction, error) {
 	var createData CreateData
 	err := borsh.Deserialize(&createData, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := types.PumpFunCreateAction{
+	action := pumpfun.CreateAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       pumpfun.Program,
 			ProgramName:     pumpfun.ProgramName,

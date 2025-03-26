@@ -17,7 +17,7 @@ type BuyData struct {
 	MaxSolCost    uint64
 }
 
-func BuyParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.PumpFunBuyAction, error) {
+func BuyParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*pumpfun.BuyAction, error) {
 	var buyData BuyData
 	err := borsh.Deserialize(&buyData, decodedData)
 	if err != nil {
@@ -79,7 +79,7 @@ func BuyParser(result *types.ParsedResult, instruction types.Instruction, decode
 		}
 	}
 
-	action := types.PumpFunBuyAction{
+	action := pumpfun.BuyAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       pumpfun.Program,
 			ProgramName:     pumpfun.ProgramName,

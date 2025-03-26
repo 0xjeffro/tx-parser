@@ -53,7 +53,7 @@ func TestPumpFunSell_0(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
-	if sellAction, ok := action.(*types.PumpFunSellAction); ok {
+	if sellAction, ok := action.(*pumpfun.SellAction); ok {
 		assert.Equal(t, sellAction.ProgramID, pumpfun.Program)
 		assert.Equal(t, sellAction.ProgramName, "PumpFun")
 		assert.Equal(t, sellAction.InstructionName, "Sell")
@@ -75,7 +75,7 @@ func TestPumpFunBuy_0(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[2]
-	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+	if buyAction, ok := action.(*pumpfun.BuyAction); ok {
 		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
 		assert.Equal(t, buyAction.ProgramName, "PumpFun")
 		assert.Equal(t, buyAction.InstructionName, "Buy")
@@ -98,7 +98,7 @@ func TestPumpFunBuy_1(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[4]
-	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+	if buyAction, ok := action.(*pumpfun.BuyAction); ok {
 		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
 		assert.Equal(t, buyAction.ProgramName, "PumpFun")
 		assert.Equal(t, buyAction.InstructionName, "Buy")
@@ -121,7 +121,7 @@ func TestPumpFunBuyBundle(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[1]
-	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+	if buyAction, ok := action.(*pumpfun.BuyAction); ok {
 		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
 		assert.Equal(t, buyAction.ProgramName, "PumpFun")
 		assert.Equal(t, buyAction.InstructionName, "Buy")
@@ -136,7 +136,7 @@ func TestPumpFunBuyBundle(t *testing.T) {
 	}
 
 	action = results[0].Actions[3]
-	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+	if buyAction, ok := action.(*pumpfun.BuyAction); ok {
 		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
 		assert.Equal(t, buyAction.ProgramName, "PumpFun")
 		assert.Equal(t, buyAction.InstructionName, "Buy")
@@ -151,7 +151,7 @@ func TestPumpFunBuyBundle(t *testing.T) {
 	}
 
 	action = results[0].Actions[5]
-	if buyAction, ok := action.(*types.PumpFunBuyAction); ok {
+	if buyAction, ok := action.(*pumpfun.BuyAction); ok {
 		assert.Equal(t, buyAction.ProgramID, pumpfun.Program)
 		assert.Equal(t, buyAction.ProgramName, "PumpFun")
 		assert.Equal(t, buyAction.InstructionName, "Buy")
@@ -173,7 +173,7 @@ func TestPumpFunCreate_0(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
-	if createAction, ok := action.(*types.PumpFunCreateAction); ok {
+	if createAction, ok := action.(*pumpfun.CreateAction); ok {
 		assert.Equal(t, createAction.ProgramID, pumpfun.Program)
 		assert.Equal(t, createAction.ProgramName, "PumpFun")
 		assert.Equal(t, createAction.InstructionName, "Create")
