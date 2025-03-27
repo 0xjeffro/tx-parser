@@ -5,8 +5,8 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func CloseDcaParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.JupiterDcaCloseDcaAction, error) {
-	return &types.JupiterDcaCloseDcaAction{
+func CloseDcaParser(result *types.ParsedResult, instruction types.Instruction) (*jupiterDCA.CloseDcaAction, error) {
+	return &jupiterDCA.CloseDcaAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     jupiterDCA.ProgramName,

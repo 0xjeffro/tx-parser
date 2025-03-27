@@ -1,7 +1,9 @@
-package types
+package jupiterDCA
 
-type JupiterDcaOpenV2Action struct {
-	BaseAction
+import "github.com/0xjeffro/tx-parser/solana/types"
+
+type OpenV2Action struct {
+	types.BaseAction
 	InAmount         uint64  `json:"inAmount"`
 	InAmountPerCycle uint64  `json:"inAmountPerCycle"`
 	CycleFrequency   int64   `json:"cycleFrequency"`
@@ -19,8 +21,8 @@ type JupiterDcaOpenV2Action struct {
 	OutAta     string `json:"payerAta"`
 }
 
-type JupiterDcaCloseDcaAction struct {
-	BaseAction
+type CloseDcaAction struct {
+	types.BaseAction
 	User       string `json:"user"`
 	Dca        string `json:"dca"`
 	InputMint  string `json:"inputMint"`
@@ -31,8 +33,8 @@ type JupiterDcaCloseDcaAction struct {
 	UserOutAta string `json:"userOutAta"`
 }
 
-type JupiterDcaEndAndCloseAction struct {
-	BaseAction
+type EndAndCloseAction struct {
+	types.BaseAction
 	Keeper     string `json:"keeper"`
 	Dca        string `json:"dca"`
 	InputMint  string `json:"inputMint"`
@@ -43,8 +45,8 @@ type JupiterDcaEndAndCloseAction struct {
 	UserOutAta string `json:"userOutAta"`
 }
 
-type JupiterWithDrawAction struct {
-	BaseAction
+type WithdrawAction struct {
+	types.BaseAction
 	// WithDrawParams
 	// ...
 	// 58eYP8XhJKfVNm189hQinBcLacDqiYXnTadwzxXbdh9ssDNnmBi9FqaMKMkzgeiykfCDGowfREfh8p7Gziggikm9
@@ -57,8 +59,8 @@ type JupiterWithDrawAction struct {
 	UserOutAta string `json:"userOutAta"`
 }
 
-type JupiterDcaDepositAction struct {
-	BaseAction
+type DepositAction struct {
+	types.BaseAction
 	DepositIn uint64 `json:"depositIn"`
 	User      string `json:"user"`
 	Dca       string `json:"dca"`

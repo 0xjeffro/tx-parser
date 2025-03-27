@@ -6,7 +6,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func OpenDcaV2Parser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*types.JupiterDcaOpenV2Action, error) {
+func OpenDcaV2Parser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*jupiterDCA.OpenV2Action, error) {
 	var inAmount uint64
 	var inAmountPerCycle uint64
 	var cycleFrequency int64
@@ -39,7 +39,7 @@ func OpenDcaV2Parser(result *types.ParsedResult, instruction types.Instruction, 
 		*startAt = int64(binary.LittleEndian.Uint64(decodedData[59:67]))
 	}
 
-	return &types.JupiterDcaOpenV2Action{
+	return &jupiterDCA.OpenV2Action{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     jupiterDCA.ProgramName,

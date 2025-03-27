@@ -339,7 +339,7 @@ func TestJupiterDcaOpenDcaV2_0(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
 
-	if DcaAction, ok := action.(*types.JupiterDcaOpenV2Action); ok {
+	if DcaAction, ok := action.(*jupiterDCA.OpenV2Action); ok {
 		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
 		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
 		assert.Equal(t, DcaAction.Dca, "7F3Wg8gzekghzqPLGubCSSjZGj6ihVb14A6QmGKjNL92")
@@ -369,7 +369,7 @@ func TestJupiterDcaOpenDcaV2_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
 
-	if DcaAction, ok := action.(*types.JupiterDcaOpenV2Action); ok {
+	if DcaAction, ok := action.(*jupiterDCA.OpenV2Action); ok {
 		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
 		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
 		assert.Equal(t, DcaAction.Dca, "GxMofmfnZw6ia9DE2KoqjgEd1vp7VuSrhqYqLWLW6bXf")
@@ -399,7 +399,7 @@ func TestJupiterDcaEndAndClose_0(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[1]
 
-	if DcaAction, ok := action.(*types.JupiterDcaEndAndCloseAction); ok {
+	if DcaAction, ok := action.(*jupiterDCA.EndAndCloseAction); ok {
 		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
 		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
 		assert.Equal(t, DcaAction.Keeper, "JD25qVdtd65FoiXNmR89JjmoJdYk9sjYQeSTZAALFiMy")
@@ -423,7 +423,7 @@ func TestJupiterDcaEndAndClose_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[1]
 
-	if DcaAction, ok := action.(*types.JupiterDcaEndAndCloseAction); ok {
+	if DcaAction, ok := action.(*jupiterDCA.EndAndCloseAction); ok {
 		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
 		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
 		assert.Equal(t, DcaAction.Keeper, "JD38n7ynKYcgPpF7k1BhXEeREu1KqptU93fVGy3S624k")
@@ -447,7 +447,7 @@ func TestJupiterDcaCloseDca_0(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
 
-	if DcaAction, ok := action.(*types.JupiterDcaCloseDcaAction); ok {
+	if DcaAction, ok := action.(*jupiterDCA.CloseDcaAction); ok {
 		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
 		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
 		assert.Equal(t, DcaAction.User, "3k2pJD3FtFT8zZLoYRgHEQgays1jYs6LYCKi5MWNPLKJ")
