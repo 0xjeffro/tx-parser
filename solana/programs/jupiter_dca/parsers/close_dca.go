@@ -1,15 +1,15 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiterDCA"
+	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func CloseDcaParser(result *types.ParsedResult, instruction types.Instruction) (*jupiterDCA.CloseDcaAction, error) {
-	return &jupiterDCA.CloseDcaAction{
+func CloseDcaParser(result *types.ParsedResult, instruction types.Instruction) (*jupiter_dca.CloseDcaAction, error) {
+	return &jupiter_dca.CloseDcaAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-			ProgramName:     jupiterDCA.ProgramName,
+			ProgramName:     jupiter_dca.ProgramName,
 			InstructionName: "CloseDca",
 		},
 		User:       result.AccountList[instruction.Accounts[0]],

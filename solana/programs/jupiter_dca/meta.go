@@ -1,4 +1,4 @@
-package jupiterDCA
+package jupiter_dca
 
 const Program = "DCA265Vj8a9CEuX1eb1LWRnDT7uK6q1xMipnNyatn23M"
 const ProgramName = "Jupiter DCA Program"

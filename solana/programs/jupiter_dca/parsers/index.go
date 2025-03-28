@@ -1,7 +1,7 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiterDCA"
+	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 )
@@ -15,17 +15,17 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	discriminator := *(*[8]byte)(decode[:8])
 
 	switch discriminator {
-	case jupiterDCA.OpenDcaV2Discriminator:
+	case jupiter_dca.OpenDcaV2Discriminator:
 		return OpenDcaV2Parser(result, instruction, decode)
-	case jupiterDCA.EndAndCloseDiscriminator:
+	case jupiter_dca.EndAndCloseDiscriminator:
 		return EndAndCloseParser(result, instruction)
-	case jupiterDCA.CloseDcaDiscriminator:
+	case jupiter_dca.CloseDcaDiscriminator:
 		return CloseDcaParser(result, instruction)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
 				ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-				ProgramName:     jupiterDCA.ProgramName,
+				ProgramName:     jupiter_dca.ProgramName,
 				InstructionName: "Unknown",
 			},
 		}, nil

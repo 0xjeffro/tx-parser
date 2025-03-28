@@ -1,4 +1,4 @@
-package jupiterDCA
+package jupiter_dca
 
 import "github.com/0xjeffro/tx-parser/solana/types"
 

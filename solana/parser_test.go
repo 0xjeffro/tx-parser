@@ -10,7 +10,7 @@ import (
 
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiterDCA"
+	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
@@ -338,9 +338,9 @@ func TestJupiterDcaOpenDcaV2_0(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
 
-	if DcaAction, ok := action.(*jupiterDCA.OpenV2Action); ok {
-		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
-		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+	if DcaAction, ok := action.(*jupiter_dca.OpenV2Action); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiter_dca.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiter_dca.ProgramName)
 		assert.Equal(t, DcaAction.Dca, "7F3Wg8gzekghzqPLGubCSSjZGj6ihVb14A6QmGKjNL92")
 		assert.Equal(t, DcaAction.User, "BxDjGoj9y33tmkKMK5dRHeUGkSGWEs4H51uHoQaBv9Wz")
 		assert.Equal(t, DcaAction.Payer, "BxDjGoj9y33tmkKMK5dRHeUGkSGWEs4H51uHoQaBv9Wz")
@@ -368,9 +368,9 @@ func TestJupiterDcaOpenDcaV2_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
 
-	if DcaAction, ok := action.(*jupiterDCA.OpenV2Action); ok {
-		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
-		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+	if DcaAction, ok := action.(*jupiter_dca.OpenV2Action); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiter_dca.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiter_dca.ProgramName)
 		assert.Equal(t, DcaAction.Dca, "GxMofmfnZw6ia9DE2KoqjgEd1vp7VuSrhqYqLWLW6bXf")
 		assert.Equal(t, DcaAction.User, "4vYWDeg6NHUt1VoUZoV8RqZA51AUEd4VCCghA4arfuH7")
 		assert.Equal(t, DcaAction.Payer, "4vYWDeg6NHUt1VoUZoV8RqZA51AUEd4VCCghA4arfuH7")
@@ -398,9 +398,9 @@ func TestJupiterDcaEndAndClose_0(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[1]
 
-	if DcaAction, ok := action.(*jupiterDCA.EndAndCloseAction); ok {
-		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
-		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+	if DcaAction, ok := action.(*jupiter_dca.EndAndCloseAction); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiter_dca.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiter_dca.ProgramName)
 		assert.Equal(t, DcaAction.Keeper, "JD25qVdtd65FoiXNmR89JjmoJdYk9sjYQeSTZAALFiMy")
 		assert.Equal(t, DcaAction.Dca, "Cf8vzN89jMzfgg3XpNGMTkzwihzbm1AHnQy1bVyeLVcy")
 		assert.Equal(t, DcaAction.InputMint, "E1kvzJNxShvvWTrudokpzuc789vRiDXfXG3duCuY6ooE")
@@ -422,9 +422,9 @@ func TestJupiterDcaEndAndClose_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[1]
 
-	if DcaAction, ok := action.(*jupiterDCA.EndAndCloseAction); ok {
-		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
-		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+	if DcaAction, ok := action.(*jupiter_dca.EndAndCloseAction); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiter_dca.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiter_dca.ProgramName)
 		assert.Equal(t, DcaAction.Keeper, "JD38n7ynKYcgPpF7k1BhXEeREu1KqptU93fVGy3S624k")
 		assert.Equal(t, DcaAction.Dca, "DdtdfnA7mPfzbxDfU2hD7DWNe64fWL9eMk3Tb9jw9ncr")
 		assert.Equal(t, DcaAction.InputMint, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
@@ -446,9 +446,9 @@ func TestJupiterDcaCloseDca_0(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
 
-	if DcaAction, ok := action.(*jupiterDCA.CloseDcaAction); ok {
-		assert.Equal(t, DcaAction.ProgramID, jupiterDCA.Program)
-		assert.Equal(t, DcaAction.ProgramName, jupiterDCA.ProgramName)
+	if DcaAction, ok := action.(*jupiter_dca.CloseDcaAction); ok {
+		assert.Equal(t, DcaAction.ProgramID, jupiter_dca.Program)
+		assert.Equal(t, DcaAction.ProgramName, jupiter_dca.ProgramName)
 		assert.Equal(t, DcaAction.User, "3k2pJD3FtFT8zZLoYRgHEQgays1jYs6LYCKi5MWNPLKJ")
 		assert.Equal(t, DcaAction.Dca, "565uLdnjfP69rUpGuE7d5rB65V6BoqYknnWrFdt5ebFk")
 		assert.Equal(t, DcaAction.InputMint, "6T44rfi9BDUdZbEvVddZWVfsGrpC6N1sSSKYnCsLpump")
