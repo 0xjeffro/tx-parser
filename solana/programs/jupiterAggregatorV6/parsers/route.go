@@ -114,13 +114,16 @@ func RouteParser(result *types.ParsedResult, instruction types.Instruction) (*ju
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     jupiterAggregatorV6.ProgramName,
 			InstructionName: "Route",
+			ActionType:      "SWAP",
 		},
-		Who:               user,
-		FromToken:         fromToken,
-		FromTokenAmount:   fromTokenAmount,
-		FromTokenDecimals: fromTokenDecimals,
-		ToToken:           toToken,
-		ToTokenAmount:     toTokenAmount,
-		ToTokenDecimals:   toTokenDecimals,
+		SwapActionMixin: types.SwapActionMixin{
+			Who:               user,
+			FromToken:         fromToken,
+			FromTokenAmount:   fromTokenAmount,
+			FromTokenDecimals: fromTokenDecimals,
+			ToToken:           toToken,
+			ToTokenAmount:     toTokenAmount,
+			ToTokenDecimals:   toTokenDecimals,
+		},
 	}, nil
 }
