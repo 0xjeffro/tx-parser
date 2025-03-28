@@ -1,7 +1,7 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
+	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 )
@@ -14,13 +14,13 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	}
 	discriminator := decode[0]
 	switch discriminator {
-	case raydiumLiquidityPoolV4.SwapDiscriminator:
+	case raydium_liquidity_pool_v4.SwapDiscriminator:
 		return SwapParser(result, instruction, instructionIdx, decode)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
 				ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-				ProgramName:     raydiumLiquidityPoolV4.ProgramName,
+				ProgramName:     raydium_liquidity_pool_v4.ProgramName,
 				InstructionName: "Unknown",
 			},
 		}, nil

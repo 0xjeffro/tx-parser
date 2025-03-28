@@ -12,7 +12,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
-	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
+	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	"github.com/stretchr/testify/assert"
@@ -470,9 +470,9 @@ func TestRaydiumLiquidityPoolV4Swap_0(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[4]
 
-	if swapAction, ok := action.(*raydiumLiquidityPoolV4.SwapAction); ok {
-		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
-		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
+	if swapAction, ok := action.(*raydium_liquidity_pool_v4.SwapAction); ok {
+		assert.Equal(t, swapAction.ProgramID, raydium_liquidity_pool_v4.Program)
+		assert.Equal(t, swapAction.ProgramName, raydium_liquidity_pool_v4.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Swap")
 		assert.Equal(t, swapAction.Who, "Do3UdALe5F7NRXB4uYcBzZtCbAt8ssu4a5kGZVucKhC5")
 		assert.Equal(t, swapAction.FromToken, "2CrtdajpSb7DpMRLKP4yMtFLbCsWZjMkEvgSTf4Ypump")
@@ -495,9 +495,9 @@ func TestRaydiumLiquidityPoolV4Swap_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[4]
 
-	if swapAction, ok := action.(*raydiumLiquidityPoolV4.SwapAction); ok {
-		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
-		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
+	if swapAction, ok := action.(*raydium_liquidity_pool_v4.SwapAction); ok {
+		assert.Equal(t, swapAction.ProgramID, raydium_liquidity_pool_v4.Program)
+		assert.Equal(t, swapAction.ProgramName, raydium_liquidity_pool_v4.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Swap")
 		assert.Equal(t, swapAction.Who, "ECvj86nDupkVh1cDgxrJw3zJkw3ahcDiVB3pPTbpskjD")
 		assert.Equal(t, swapAction.FromToken, globals.WSOL)
@@ -520,9 +520,9 @@ func TestRaydiumLiquidityPoolV4Swap_2(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if swapAction, ok := action.(*raydiumLiquidityPoolV4.SwapAction); ok {
-		assert.Equal(t, swapAction.ProgramID, raydiumLiquidityPoolV4.Program)
-		assert.Equal(t, swapAction.ProgramName, raydiumLiquidityPoolV4.ProgramName)
+	if swapAction, ok := action.(*raydium_liquidity_pool_v4.SwapAction); ok {
+		assert.Equal(t, swapAction.ProgramID, raydium_liquidity_pool_v4.Program)
+		assert.Equal(t, swapAction.ProgramName, raydium_liquidity_pool_v4.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Swap")
 		assert.Equal(t, swapAction.Who, "orcACRJYTFjTeo2pV8TfYRTpmqfoYgbVi9GeANXTCc8")
 		assert.Equal(t, swapAction.FromToken, "AaJ6gmTzaQw9zxfK6BD9N89wzZLuSuwTRbi8YrTCpump")

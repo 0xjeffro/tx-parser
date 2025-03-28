@@ -1,4 +1,4 @@
-package raydiumLiquidityPoolV4
+package raydium_liquidity_pool_v4
 
 import "github.com/0xjeffro/tx-parser/solana/types"
 

@@ -2,7 +2,7 @@ package parsers
 
 import (
 	"github.com/0xjeffro/tx-parser/solana/globals"
-	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
+	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/tokenProgram/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
@@ -15,7 +15,7 @@ type SwapData struct {
 	MinimumAmountOut uint64
 }
 
-func SwapParser(result *types.ParsedResult, instruction types.Instruction, instructionIdx int, decodedData []byte) (*raydiumLiquidityPoolV4.SwapAction, error) {
+func SwapParser(result *types.ParsedResult, instruction types.Instruction, instructionIdx int, decodedData []byte) (*raydium_liquidity_pool_v4.SwapAction, error) {
 	var swapData SwapData
 	err := borsh.Deserialize(&swapData, decodedData)
 	if err != nil {
@@ -68,10 +68,10 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, instr
 		}
 	}
 
-	action := raydiumLiquidityPoolV4.SwapAction{
+	action := raydium_liquidity_pool_v4.SwapAction{
 		BaseAction: types.BaseAction{
-			ProgramID:       raydiumLiquidityPoolV4.Program,
-			ProgramName:     raydiumLiquidityPoolV4.ProgramName,
+			ProgramID:       raydium_liquidity_pool_v4.Program,
+			ProgramName:     raydium_liquidity_pool_v4.ProgramName,
 			InstructionName: "Swap",
 		},
 		Who:               who,
