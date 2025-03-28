@@ -10,7 +10,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func RouteParser(result *types.ParsedResult, instruction types.Instruction) (*types.JupiterAggregatorV6RouteAction, error) {
+func RouteParser(result *types.ParsedResult, instruction types.Instruction) (*jupiterAggregatorV6.RouteAction, error) {
 	user := result.AccountList[instruction.Accounts[1]]
 	fromTokenAccount := result.AccountList[instruction.Accounts[2]]
 	toTokenAccount := result.AccountList[instruction.Accounts[3]]
@@ -109,7 +109,7 @@ func RouteParser(result *types.ParsedResult, instruction types.Instruction) (*ty
 		toTokenDecimals = globals.SOLDecimals
 	}
 
-	return &types.JupiterAggregatorV6RouteAction{
+	return &jupiterAggregatorV6.RouteAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     jupiterAggregatorV6.ProgramName,

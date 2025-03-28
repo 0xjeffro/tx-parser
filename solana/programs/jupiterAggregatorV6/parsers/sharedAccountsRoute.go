@@ -10,7 +10,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Instruction) (*types.JupiterAggregatorV6SharedAccountRouteAction, error) {
+func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Instruction) (*jupiterAggregatorV6.SharedAccountRouteAction, error) {
 	user := result.AccountList[instruction.Accounts[2]]
 	fromTokenAccount := result.AccountList[instruction.Accounts[3]]
 	toTokenAccount := result.AccountList[instruction.Accounts[6]]
@@ -102,7 +102,7 @@ func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Ins
 		}
 	}
 
-	return &types.JupiterAggregatorV6SharedAccountRouteAction{
+	return &jupiterAggregatorV6.SharedAccountRouteAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     jupiterAggregatorV6.ProgramName,

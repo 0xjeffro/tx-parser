@@ -1,7 +1,9 @@
-package types
+package jupiterAggregatorV6
 
-type JupiterAggregatorV6SharedAccountRouteAction struct {
-	BaseAction
+import "github.com/0xjeffro/tx-parser/solana/types"
+
+type SharedAccountRouteAction struct {
+	types.BaseAction
 	Who               string `json:"who"`
 	FromToken         string `json:"fromToken"`
 	FromTokenAmount   uint64 `json:"fromTokenAmount"`
@@ -11,8 +13,8 @@ type JupiterAggregatorV6SharedAccountRouteAction struct {
 	ToTokenDecimals   uint64 `json:"toTokenDecimals"`
 }
 
-type JupiterAggregatorV6RouteAction struct {
-	BaseAction
+type RouteAction struct {
+	types.BaseAction
 	Who               string `json:"who"`
 	FromToken         string `json:"fromToken"`
 	FromTokenAmount   uint64 `json:"fromTokenAmount"`

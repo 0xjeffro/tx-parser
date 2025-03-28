@@ -15,7 +15,6 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
-	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -546,7 +545,7 @@ func TestJupiterAggregatorV6SharedAccountRoute_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if swapAction, ok := action.(*types.JupiterAggregatorV6SharedAccountRouteAction); ok {
+	if swapAction, ok := action.(*jupiterAggregatorV6.SharedAccountRouteAction); ok {
 		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
 		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "SharedAccountsRoute")
@@ -568,7 +567,7 @@ func TestJupiterAggregatorV6SharedAccountRoute_2(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[2]
 
-	if swapAction, ok := action.(*types.JupiterAggregatorV6SharedAccountRouteAction); ok {
+	if swapAction, ok := action.(*jupiterAggregatorV6.SharedAccountRouteAction); ok {
 		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
 		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "SharedAccountsRoute")
@@ -590,7 +589,7 @@ func TestJupiterAggregatorV6Route_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[5]
 
-	if swapAction, ok := action.(*types.JupiterAggregatorV6RouteAction); ok {
+	if swapAction, ok := action.(*jupiterAggregatorV6.RouteAction); ok {
 		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
 		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Route")
@@ -612,7 +611,7 @@ func TestJupiterAggregatorV6Route_2(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if swapAction, ok := action.(*types.JupiterAggregatorV6RouteAction); ok {
+	if swapAction, ok := action.(*jupiterAggregatorV6.RouteAction); ok {
 		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
 		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Route")
