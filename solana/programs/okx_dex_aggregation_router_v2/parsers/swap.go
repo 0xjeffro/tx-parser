@@ -3,8 +3,8 @@ package parsers
 import (
 	"encoding/binary"
 	"github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
-	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
-	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
+	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/tokenProgram/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
@@ -40,13 +40,13 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, decod
 	for _, instr := range innerInstructions {
 		programId := result.AccountList[instr.ProgramIDIndex]
 		switch programId {
-		case systemProgram.Program:
+		case system_program.Program:
 			parsedData, err := SystemProgramParsers.InstructionRouter(result, instr)
 			if err != nil {
 				continue
 			}
 			switch p := parsedData.(type) {
-			case *systemProgram.TransferAction:
+			case *system_program.TransferAction:
 				if p.To == toTokenAccount {
 					toTokenAmount += p.Lamports
 				}

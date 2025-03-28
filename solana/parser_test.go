@@ -13,7 +13,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
-	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
+	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	"github.com/stretchr/testify/assert"
 )
@@ -232,9 +232,9 @@ func TestSystemProgramTransfer(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[1]
-	if transferAction, ok := action.(*systemProgram.TransferAction); ok {
-		assert.Equal(t, transferAction.ProgramID, systemProgram.Program)
-		assert.Equal(t, transferAction.ProgramName, systemProgram.ProgramName)
+	if transferAction, ok := action.(*system_program.TransferAction); ok {
+		assert.Equal(t, transferAction.ProgramID, system_program.Program)
+		assert.Equal(t, transferAction.ProgramName, system_program.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Transfer")
 		assert.Equal(t, transferAction.From, "4DdrfiDHpmx55i4SPssxVzS9ZaKLb8qr45NKY9Er9nNh")
 		assert.Equal(t, transferAction.To, "HWEoBxYs7ssKuudEjzjmpfJVX7Dvi7wescFsVx2L5yoY")
@@ -251,9 +251,9 @@ func TestSystemProgramCreateAccountWithSeed(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[2]
-	if transferAction, ok := action.(*systemProgram.CreateAccountWithSeedAction); ok {
-		assert.Equal(t, transferAction.ProgramID, systemProgram.Program)
-		assert.Equal(t, transferAction.ProgramName, systemProgram.ProgramName)
+	if transferAction, ok := action.(*system_program.CreateAccountWithSeedAction); ok {
+		assert.Equal(t, transferAction.ProgramID, system_program.Program)
+		assert.Equal(t, transferAction.ProgramName, system_program.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "CreateAccountWithSeed")
 		assert.Equal(t, transferAction.Who, "Do3UdALe5F7NRXB4uYcBzZtCbAt8ssu4a5kGZVucKhC5")
 		assert.Equal(t, transferAction.NewAccount, "AgcEC7E1yxeZoRVnAZTmGA86ncrPTqKkBiz1T9F5MxhN")

@@ -2,12 +2,12 @@ package parsers
 
 import (
 	"encoding/binary"
-	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
+	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	solanago "github.com/gagliardetto/solana-go"
 )
 
-func CreateAccountWithSeedParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*systemProgram.CreateAccountWithSeedAction, error) {
+func CreateAccountWithSeedParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*system_program.CreateAccountWithSeedAction, error) {
 	basePubKey := solanago.PublicKeyFromBytes(decodedData[4:36])
 	seedLength := binary.LittleEndian.Uint64(decodedData[36:44])
 	seed := string(decodedData[44 : 44+seedLength])
@@ -15,10 +15,10 @@ func CreateAccountWithSeedParser(result *types.ParsedResult, instruction types.I
 	space := binary.LittleEndian.Uint64(decodedData[44+seedLength+8 : 44+seedLength+16])
 	ownerPubKey := solanago.PublicKeyFromBytes(decodedData[44+seedLength+16 : 44+seedLength+16+32])
 
-	action := systemProgram.CreateAccountWithSeedAction{
+	action := system_program.CreateAccountWithSeedAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-			ProgramName:     systemProgram.ProgramName,
+			ProgramName:     system_program.ProgramName,
 			InstructionName: "CreateAccountWithSeed",
 		},
 		Who:        result.AccountList[instruction.Accounts[0]],

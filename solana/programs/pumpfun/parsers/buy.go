@@ -4,8 +4,8 @@ import (
 	"encoding/binary"
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
-	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
-	systemParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
+	systemParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 	"github.com/near/borsh-go"
@@ -66,9 +66,9 @@ func BuyParser(result *types.ParsedResult, instruction types.Instruction, decode
 					buySolAmount = action.SolAmount
 				}
 			}
-		} else if programId == systemProgram.Program {
+		} else if programId == system_program.Program {
 			discriminator := binary.LittleEndian.Uint32(decode[0:4])
-			if discriminator == systemProgram.TransferDiscriminator {
+			if discriminator == system_program.TransferDiscriminator {
 				action, err := systemParsers.TransferParser(result, instr, decode)
 				if err == nil {
 					if action.To == feeRecipient {

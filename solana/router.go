@@ -13,8 +13,8 @@ import (
 	PumpfunParsers "github.com/0xjeffro/tx-parser/solana/programs/pumpfun/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
 	RaydiumLiquidityPoolV4 "github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4/parsers"
-	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
-	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
+	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/tokenProgram/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
@@ -30,7 +30,7 @@ func router(result *types.ParsedResult, instructionIdx int) (action types.Action
 	programID := result.AccountList[result.RawTx.Transaction.Message.Instructions[instructionIdx].ProgramIDIndex]
 	instruction := result.RawTx.Transaction.Message.Instructions[instructionIdx]
 	switch programID {
-	case systemProgram.Program:
+	case system_program.Program:
 		return SystemProgramParsers.InstructionRouter(result, instruction)
 	case tokenProgram.Program:
 		return TokenProgramParsers.InstructionRouter(result, instruction)

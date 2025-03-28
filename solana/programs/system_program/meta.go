@@ -1,4 +1,4 @@
-package systemProgram
+package system_program
 
 const Program = "11111111111111111111111111111111"
 const ProgramName = "System Program"

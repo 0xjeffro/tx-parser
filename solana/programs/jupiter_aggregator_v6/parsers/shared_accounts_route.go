@@ -3,8 +3,8 @@ package parsers
 import (
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6"
-	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
-	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
+	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
 	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/tokenProgram/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
@@ -38,13 +38,13 @@ func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Ins
 	for _, instr := range instructions {
 		programId := result.AccountList[instr.ProgramIDIndex]
 		switch programId {
-		case systemProgram.Program:
+		case system_program.Program:
 			parsedData, err := SystemProgramParsers.InstructionRouter(result, instr)
 			if err != nil {
 				continue
 			}
 			switch p := parsedData.(type) {
-			case *systemProgram.TransferAction:
+			case *system_program.TransferAction:
 				if p.From == fromTokenAccount {
 					fromTokenAmount += p.Lamports
 				}
