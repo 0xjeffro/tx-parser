@@ -1,4 +1,4 @@
-package OKXDEXAggregationRouterV2
+package okx_dex_aggregation_router_v2
 
 const Program = "6m2CDdhRgxpH4WjvdzxAYbGxwdGUz5MziiL5jek2kBma"
 const ProgramName = "OKX DEX: Aggregation Router V2"

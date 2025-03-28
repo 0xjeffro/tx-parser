@@ -1,14 +1,14 @@
 package solana
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2"
-	OKXDEXAggregationRouterV2Parsers "github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
 	ComputeBudgetParsers "github.com/0xjeffro/tx-parser/solana/programs/compute_budget/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6"
 	JupiterAggregatorV6 "github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
 	JupiterDCA "github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
+	OKXDEXAggregationRouterV2Parsers "github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	PumpfunParsers "github.com/0xjeffro/tx-parser/solana/programs/pumpfun/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
@@ -44,7 +44,7 @@ func router(result *types.ParsedResult, instructionIdx int) (action types.Action
 		return RaydiumLiquidityPoolV4.InstructionRouter(result, instruction, instructionIdx)
 	case jupiter_aggregator_v6.Program:
 		return JupiterAggregatorV6.InstructionRouter(result, instruction)
-	case OKXDEXAggregationRouterV2.Program:
+	case okx_dex_aggregation_router_v2.Program:
 		return OKXDEXAggregationRouterV2Parsers.InstructionRouter(result, instruction)
 
 	default:

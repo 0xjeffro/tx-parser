@@ -2,8 +2,8 @@ package solana
 
 import (
 	"fmt"
-	"github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6"
+	"github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -635,9 +635,9 @@ func TestOKXDEXCommissionSplProxySwap_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if swapAction, ok := action.(*OKXDEXAggregationRouterV2.CommissionSplProxySwapAction); ok {
-		assert.Equal(t, swapAction.ProgramID, OKXDEXAggregationRouterV2.Program)
-		assert.Equal(t, swapAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+	if swapAction, ok := action.(*okx_dex_aggregation_router_v2.CommissionSplProxySwapAction); ok {
+		assert.Equal(t, swapAction.ProgramID, okx_dex_aggregation_router_v2.Program)
+		assert.Equal(t, swapAction.ProgramName, okx_dex_aggregation_router_v2.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "CommissionSplProxySwap")
 		assert.Equal(t, swapAction.Who, "GKj54MVFppoYsxPU9jMn7CMniVRAuveFadyTtFhn1vXy")
 		assert.Equal(t, swapAction.FromToken, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
@@ -659,10 +659,10 @@ func TestOKXDEXSwap(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if transferAction, ok := action.(*OKXDEXAggregationRouterV2.SwapAction); ok {
+	if transferAction, ok := action.(*okx_dex_aggregation_router_v2.SwapAction); ok {
 		fmt.Println(transferAction.InstructionName)
-		assert.Equal(t, transferAction.ProgramID, OKXDEXAggregationRouterV2.Program)
-		assert.Equal(t, transferAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+		assert.Equal(t, transferAction.ProgramID, okx_dex_aggregation_router_v2.Program)
+		assert.Equal(t, transferAction.ProgramName, okx_dex_aggregation_router_v2.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Swap")
 		assert.Equal(t, transferAction.FromToken, "7atgF8KQo4wJrD5ATGX7t1V2zVvykPJbFfNeVf1icFv1")
 		assert.Equal(t, transferAction.FromTokenAmount, uint64(358800))
@@ -683,10 +683,10 @@ func TestOKXDEXSwap_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[7]
 
-	if transferAction, ok := action.(*OKXDEXAggregationRouterV2.SwapAction); ok {
+	if transferAction, ok := action.(*okx_dex_aggregation_router_v2.SwapAction); ok {
 		fmt.Println(transferAction.InstructionName)
-		assert.Equal(t, transferAction.ProgramID, OKXDEXAggregationRouterV2.Program)
-		assert.Equal(t, transferAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+		assert.Equal(t, transferAction.ProgramID, okx_dex_aggregation_router_v2.Program)
+		assert.Equal(t, transferAction.ProgramName, okx_dex_aggregation_router_v2.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Swap")
 		assert.Equal(t, transferAction.FromToken, "So11111111111111111111111111111111111111112")
 		assert.Equal(t, transferAction.FromTokenAmount, uint64(10000000000))
@@ -707,10 +707,10 @@ func TestOKXDEXSwap_2(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[4]
 
-	if transferAction, ok := action.(*OKXDEXAggregationRouterV2.SwapAction); ok {
+	if transferAction, ok := action.(*okx_dex_aggregation_router_v2.SwapAction); ok {
 		fmt.Println(transferAction.InstructionName)
-		assert.Equal(t, transferAction.ProgramID, OKXDEXAggregationRouterV2.Program)
-		assert.Equal(t, transferAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+		assert.Equal(t, transferAction.ProgramID, okx_dex_aggregation_router_v2.Program)
+		assert.Equal(t, transferAction.ProgramName, okx_dex_aggregation_router_v2.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Swap")
 		assert.Equal(t, transferAction.FromToken, "HjhCs97TBaJBfaJf3ukzs8CEsGApYjgz88wrhdTPpump")
 		assert.Equal(t, transferAction.FromTokenAmount, uint64(58882325154))
@@ -731,9 +731,9 @@ func TestOKXDEXCommissionSolSwap(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[7]
 
-	if swapAction, ok := action.(*OKXDEXAggregationRouterV2.CommissionSolSwap2Action); ok {
-		assert.Equal(t, swapAction.ProgramID, OKXDEXAggregationRouterV2.Program)
-		assert.Equal(t, swapAction.ProgramName, OKXDEXAggregationRouterV2.ProgramName)
+	if swapAction, ok := action.(*okx_dex_aggregation_router_v2.CommissionSolSwap2Action); ok {
+		assert.Equal(t, swapAction.ProgramID, okx_dex_aggregation_router_v2.Program)
+		assert.Equal(t, swapAction.ProgramName, okx_dex_aggregation_router_v2.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "CommissionSolSwap2")
 		assert.Equal(t, swapAction.Who, "AG27WXxPym3K73JFKtpRxwbMfnRnuPu5bn6juzcvq5rp")
 		assert.Equal(t, swapAction.FromToken, "So11111111111111111111111111111111111111112")

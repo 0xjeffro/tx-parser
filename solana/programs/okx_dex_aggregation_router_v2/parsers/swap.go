@@ -2,7 +2,7 @@ package parsers
 
 import (
 	"encoding/binary"
-	"github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2"
+	"github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
 	"github.com/0xjeffro/tx-parser/solana/programs/systemProgram"
 	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/systemProgram/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
@@ -10,7 +10,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func SwapParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*OKXDEXAggregationRouterV2.SwapAction, error) {
+func SwapParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*okx_dex_aggregation_router_v2.SwapAction, error) {
 	who := result.AccountList[instruction.Accounts[0]]
 	fromToken := result.AccountList[instruction.Accounts[3]]
 	toToken := result.AccountList[instruction.Accounts[4]]
@@ -22,7 +22,7 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, decod
 	// get index of this instruction
 	var instructionIndex int
 	for idx, instr := range result.RawTx.Transaction.Message.Instructions {
-		if result.AccountList[instr.ProgramIDIndex] == OKXDEXAggregationRouterV2.Program && instr.Data == instruction.Data {
+		if result.AccountList[instr.ProgramIDIndex] == okx_dex_aggregation_router_v2.Program && instr.Data == instruction.Data {
 			instructionIndex = idx
 			break
 		}
@@ -92,10 +92,10 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, decod
 		}
 	}
 
-	action := OKXDEXAggregationRouterV2.SwapAction{
+	action := okx_dex_aggregation_router_v2.SwapAction{
 		BaseAction: types.BaseAction{
-			ProgramID:       OKXDEXAggregationRouterV2.Program,
-			ProgramName:     OKXDEXAggregationRouterV2.ProgramName,
+			ProgramID:       okx_dex_aggregation_router_v2.Program,
+			ProgramName:     okx_dex_aggregation_router_v2.ProgramName,
 			InstructionName: "Swap",
 		},
 		Who:               who,

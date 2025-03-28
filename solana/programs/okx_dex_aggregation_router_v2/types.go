@@ -1,4 +1,4 @@
-package OKXDEXAggregationRouterV2
+package okx_dex_aggregation_router_v2
 
 import "github.com/0xjeffro/tx-parser/solana/types"
 
