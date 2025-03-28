@@ -3,7 +3,7 @@ package solana
 import (
 	"fmt"
 	"github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2"
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6"
+	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -545,9 +545,9 @@ func TestJupiterAggregatorV6SharedAccountRoute_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if swapAction, ok := action.(*jupiterAggregatorV6.SharedAccountRouteAction); ok {
-		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
-		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
+	if swapAction, ok := action.(*jupiter_aggregator_v6.SharedAccountRouteAction); ok {
+		assert.Equal(t, swapAction.ProgramID, jupiter_aggregator_v6.Program)
+		assert.Equal(t, swapAction.ProgramName, jupiter_aggregator_v6.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "SharedAccountsRoute")
 		assert.Equal(t, swapAction.Who, "AVYG9UHetNHT1FEDPLv9pN2sCCH4CLsjvkzGjVXBfEiS")
 		assert.Equal(t, swapAction.FromToken, "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v")
@@ -567,9 +567,9 @@ func TestJupiterAggregatorV6SharedAccountRoute_2(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[2]
 
-	if swapAction, ok := action.(*jupiterAggregatorV6.SharedAccountRouteAction); ok {
-		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
-		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
+	if swapAction, ok := action.(*jupiter_aggregator_v6.SharedAccountRouteAction); ok {
+		assert.Equal(t, swapAction.ProgramID, jupiter_aggregator_v6.Program)
+		assert.Equal(t, swapAction.ProgramName, jupiter_aggregator_v6.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "SharedAccountsRoute")
 		assert.Equal(t, swapAction.Who, "GKj54MVFppoYsxPU9jMn7CMniVRAuveFadyTtFhn1vXy")
 		assert.Equal(t, swapAction.FromToken, "CMjfdovtzmgRsnhE1cCzdwDFGKt1UzZB4oCGQchQpump")
@@ -589,9 +589,9 @@ func TestJupiterAggregatorV6Route_1(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[5]
 
-	if swapAction, ok := action.(*jupiterAggregatorV6.RouteAction); ok {
-		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
-		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
+	if swapAction, ok := action.(*jupiter_aggregator_v6.RouteAction); ok {
+		assert.Equal(t, swapAction.ProgramID, jupiter_aggregator_v6.Program)
+		assert.Equal(t, swapAction.ProgramName, jupiter_aggregator_v6.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Route")
 		assert.Equal(t, swapAction.ActionLabel, "SWAP")
 		assert.Equal(t, swapAction.Who, "3huskHPRJXT5pL6RW57HaA8pXRFojx6gfNVGL9cJ2vtB")
@@ -612,9 +612,9 @@ func TestJupiterAggregatorV6Route_2(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if swapAction, ok := action.(*jupiterAggregatorV6.RouteAction); ok {
-		assert.Equal(t, swapAction.ProgramID, jupiterAggregatorV6.Program)
-		assert.Equal(t, swapAction.ProgramName, jupiterAggregatorV6.ProgramName)
+	if swapAction, ok := action.(*jupiter_aggregator_v6.RouteAction); ok {
+		assert.Equal(t, swapAction.ProgramID, jupiter_aggregator_v6.Program)
+		assert.Equal(t, swapAction.ProgramName, jupiter_aggregator_v6.ProgramName)
 		assert.Equal(t, swapAction.InstructionName, "Route")
 		assert.Equal(t, swapAction.ActionLabel, "SWAP")
 		assert.Equal(t, swapAction.Who, "63EazyqF9nJN8SdGTMUaLrRKxS3XnmUiFuDp5KZ9wEV8")

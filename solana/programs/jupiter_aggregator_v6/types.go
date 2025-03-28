@@ -1,4 +1,4 @@
-package jupiterAggregatorV6
+package jupiter_aggregator_v6
 
 import "github.com/0xjeffro/tx-parser/solana/types"
 
