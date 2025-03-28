@@ -3,8 +3,8 @@ package solana
 import (
 	"github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2"
 	OKXDEXAggregationRouterV2Parsers "github.com/0xjeffro/tx-parser/solana/programs/OKXDEXAggregationRouterV2/parsers"
-	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
-	ComputeBudgetParsers "github.com/0xjeffro/tx-parser/solana/programs/computeBudget/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
+	ComputeBudgetParsers "github.com/0xjeffro/tx-parser/solana/programs/compute_budget/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6"
 	JupiterAggregatorV6 "github.com/0xjeffro/tx-parser/solana/programs/jupiterAggregatorV6/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiterDCA"
@@ -34,7 +34,7 @@ func router(result *types.ParsedResult, instructionIdx int) (action types.Action
 		return SystemProgramParsers.InstructionRouter(result, instruction)
 	case tokenProgram.Program:
 		return TokenProgramParsers.InstructionRouter(result, instruction)
-	case computeBudget.Program:
+	case compute_budget.Program:
 		return ComputeBudgetParsers.InstructionRouter(result, instruction)
 	case pumpfun.Program:
 		return PumpfunParsers.InstructionRouter(result, instruction)

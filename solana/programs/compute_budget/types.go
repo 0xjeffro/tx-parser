@@ -1,4 +1,4 @@
-package computeBudget
+package compute_budget
 
 import "github.com/0xjeffro/tx-parser/solana/types"
 

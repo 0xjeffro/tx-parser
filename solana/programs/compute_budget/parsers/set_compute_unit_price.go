@@ -1,7 +1,7 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
+	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
@@ -11,17 +11,17 @@ type SetComputeUnitPriceData struct {
 	Units         uint64
 }
 
-func SetComputeUnitPriceParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*computeBudget.SetComputeUnitPriceAction, error) {
+func SetComputeUnitPriceParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*compute_budget.SetComputeUnitPriceAction, error) {
 	var data SetComputeUnitPriceData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := computeBudget.SetComputeUnitPriceAction{
+	action := compute_budget.SetComputeUnitPriceAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-			ProgramName:     computeBudget.ProgramName,
+			ProgramName:     compute_budget.ProgramName,
 			InstructionName: "SetComputeUnitPrice",
 		},
 		MicroLamports: data.Units,

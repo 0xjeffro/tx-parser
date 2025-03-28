@@ -1,7 +1,7 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
+	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 )
@@ -15,15 +15,15 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	discriminator := decode[0]
 
 	switch discriminator {
-	case computeBudget.SetComputeUnitLimitDiscriminator:
+	case compute_budget.SetComputeUnitLimitDiscriminator:
 		return SetComputeUnitLimitParser(result, instruction, decode)
-	case computeBudget.SetComputeUnitPriceDiscriminator:
+	case compute_budget.SetComputeUnitPriceDiscriminator:
 		return SetComputeUnitPriceParser(result, instruction, decode)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
 				ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-				ProgramName:     computeBudget.ProgramName,
+				ProgramName:     compute_budget.ProgramName,
 				InstructionName: "Unknown",
 			},
 		}, nil

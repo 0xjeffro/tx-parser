@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	"github.com/0xjeffro/tx-parser/solana/globals"
-	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
+	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiterDCA"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydiumLiquidityPoolV4"
@@ -198,8 +198,8 @@ func TestComputeBudgetSetComputeUnitLimit(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[0]
-	if setAction, ok := action.(*computeBudget.SetComputeUnitLimitAction); ok {
-		assert.Equal(t, setAction.ProgramID, computeBudget.Program)
+	if setAction, ok := action.(*compute_budget.SetComputeUnitLimitAction); ok {
+		assert.Equal(t, setAction.ProgramID, compute_budget.Program)
 		assert.Equal(t, setAction.ProgramName, "ComputeBudget")
 		assert.Equal(t, setAction.InstructionName, "SetComputeUnitLimit")
 		assert.Equal(t, setAction.ComputeUnitLimit, uint32(100000))
@@ -215,8 +215,8 @@ func TestComputeBudgetSetComputeUnitPrice(t *testing.T) {
 	}
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[2]
-	if setAction, ok := action.(*computeBudget.SetComputeUnitPriceAction); ok {
-		assert.Equal(t, setAction.ProgramID, computeBudget.Program)
+	if setAction, ok := action.(*compute_budget.SetComputeUnitPriceAction); ok {
+		assert.Equal(t, setAction.ProgramID, compute_budget.Program)
 		assert.Equal(t, setAction.ProgramName, "ComputeBudget")
 		assert.Equal(t, setAction.InstructionName, "SetComputeUnitPrice")
 		assert.Equal(t, setAction.MicroLamports, uint64(315000))

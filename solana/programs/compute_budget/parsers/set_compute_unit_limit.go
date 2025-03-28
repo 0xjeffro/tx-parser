@@ -1,7 +1,7 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/computeBudget"
+	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
@@ -11,17 +11,17 @@ type SetComputeUnitLimitData struct {
 	Unit          uint32
 }
 
-func SetComputeUnitLimitParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*computeBudget.SetComputeUnitLimitAction, error) {
+func SetComputeUnitLimitParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*compute_budget.SetComputeUnitLimitAction, error) {
 	var data SetComputeUnitLimitData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := computeBudget.SetComputeUnitLimitAction{
+	action := compute_budget.SetComputeUnitLimitAction{
 		BaseAction: types.BaseAction{
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-			ProgramName:     computeBudget.ProgramName,
+			ProgramName:     compute_budget.ProgramName,
 			InstructionName: "SetComputeUnitLimit",
 		},
 		ComputeUnitLimit: data.Unit,

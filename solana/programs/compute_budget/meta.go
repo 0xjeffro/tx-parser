@@ -1,4 +1,4 @@
-package computeBudget
+package compute_budget
 
 const Program = "ComputeBudget111111111111111111111111111111"
 const ProgramName = "ComputeBudget"
