@@ -1,7 +1,7 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
+	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 )
@@ -15,18 +15,18 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	discriminator := decode[0]
 
 	switch discriminator {
-	case tokenProgram.TransferDiscriminator:
+	case token_program.TransferDiscriminator:
 		return TransferParser(result, instruction, decode)
-	case tokenProgram.TransferCheckedDiscriminator:
+	case token_program.TransferCheckedDiscriminator:
 		return TransferCheckedParser(result, instruction, decode)
-	case tokenProgram.InitializeAccountDiscriminator:
+	case token_program.InitializeAccountDiscriminator:
 		return InitializeAccountParser(result, instruction)
 
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{
 				ProgramID:       result.AccountList[instruction.ProgramIDIndex],
-				ProgramName:     tokenProgram.ProgramName,
+				ProgramName:     token_program.ProgramName,
 				InstructionName: "Unknown",
 			},
 		}, nil

@@ -2,12 +2,12 @@ package parsers
 
 import (
 	"encoding/binary"
-	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
+	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
 
-func TransferCheckedParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*tokenProgram.TransferCheckedAction, error) {
+func TransferCheckedParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*token_program.TransferCheckedAction, error) {
 	var data TransferData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
@@ -18,10 +18,10 @@ func TransferCheckedParser(result *types.ParsedResult, instruction types.Instruc
 	fromTokenAccount := result.AccountList[instruction.Accounts[0]]
 	mint := result.AccountList[instruction.Accounts[1]]
 	toTokenAccount := result.AccountList[instruction.Accounts[2]]
-	action := tokenProgram.TransferCheckedAction{
+	action := token_program.TransferCheckedAction{
 		BaseAction: types.BaseAction{
-			ProgramID:       tokenProgram.Program,
-			ProgramName:     tokenProgram.ProgramName,
+			ProgramID:       token_program.Program,
+			ProgramName:     token_program.ProgramName,
 			InstructionName: "TransferChecked",
 		},
 		From:     fromTokenAccount,

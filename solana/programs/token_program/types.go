@@ -1,4 +1,4 @@
-package tokenProgram
+package token_program
 
 import "github.com/0xjeffro/tx-parser/solana/types"
 

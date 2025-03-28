@@ -1,7 +1,7 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
+	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
@@ -11,17 +11,17 @@ type TransferData struct {
 	Amount        uint64
 }
 
-func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*tokenProgram.TransferAction, error) {
+func TransferParser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*token_program.TransferAction, error) {
 	var data TransferData
 	err := borsh.Deserialize(&data, decodedData)
 	if err != nil {
 		return nil, err
 	}
 
-	action := tokenProgram.TransferAction{
+	action := token_program.TransferAction{
 		BaseAction: types.BaseAction{
-			ProgramID:       tokenProgram.Program,
-			ProgramName:     tokenProgram.ProgramName,
+			ProgramID:       token_program.Program,
+			ProgramName:     token_program.ProgramName,
 			InstructionName: "Transfer",
 		},
 		From:   result.AccountList[instruction.Accounts[0]],

@@ -3,8 +3,8 @@ package parsers
 import (
 	"github.com/0xjeffro/tx-parser/solana/globals"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
-	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
-	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/tokenProgram/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
+	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/token_program/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
@@ -54,12 +54,12 @@ func SwapParser(result *types.ParsedResult, instruction types.Instruction, instr
 		}
 	}
 	for _, innerInstruction := range associatedInnerInstructions {
-		if result.AccountList[innerInstruction.ProgramIDIndex] == tokenProgram.Program {
+		if result.AccountList[innerInstruction.ProgramIDIndex] == token_program.Program {
 			action, err := TokenProgramParsers.InstructionRouter(result, innerInstruction)
 			if err != nil {
 				continue
 			}
-			transferAction, ok := action.(*tokenProgram.TransferAction)
+			transferAction, ok := action.(*token_program.TransferAction)
 			if ok {
 				if transferAction.To == userDestinationTokenAccount {
 					toTokenAmount = transferAction.Amount

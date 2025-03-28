@@ -1,16 +1,16 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
+	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
-func InitializeAccountParser(result *types.ParsedResult, instruction types.Instruction) (*tokenProgram.InitializeAccountAction, error) {
+func InitializeAccountParser(result *types.ParsedResult, instruction types.Instruction) (*token_program.InitializeAccountAction, error) {
 
-	action := tokenProgram.InitializeAccountAction{
+	action := token_program.InitializeAccountAction{
 		BaseAction: types.BaseAction{
-			ProgramID:       tokenProgram.Program,
-			ProgramName:     tokenProgram.ProgramName,
+			ProgramID:       token_program.Program,
+			ProgramName:     token_program.ProgramName,
 			InstructionName: "InitializeAccount",
 		},
 		Account:    result.AccountList[instruction.Accounts[0]],

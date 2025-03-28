@@ -1,4 +1,4 @@
-package tokenProgram
+package token_program
 
 const Program = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
 const ProgramName = "TokenProgram"

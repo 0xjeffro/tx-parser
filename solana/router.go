@@ -15,8 +15,8 @@ import (
 	RaydiumLiquidityPoolV4 "github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
 	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
-	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
-	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/tokenProgram/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
+	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/token_program/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
@@ -32,7 +32,7 @@ func router(result *types.ParsedResult, instructionIdx int) (action types.Action
 	switch programID {
 	case system_program.Program:
 		return SystemProgramParsers.InstructionRouter(result, instruction)
-	case tokenProgram.Program:
+	case token_program.Program:
 		return TokenProgramParsers.InstructionRouter(result, instruction)
 	case compute_budget.Program:
 		return ComputeBudgetParsers.InstructionRouter(result, instruction)

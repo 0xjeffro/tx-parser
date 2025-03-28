@@ -14,7 +14,7 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
 	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
-	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
+	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -275,9 +275,9 @@ func TestTokenProgramTransfer(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if transferAction, ok := action.(*tokenProgram.TransferAction); ok {
-		assert.Equal(t, transferAction.ProgramID, tokenProgram.Program)
-		assert.Equal(t, transferAction.ProgramName, tokenProgram.ProgramName)
+	if transferAction, ok := action.(*token_program.TransferAction); ok {
+		assert.Equal(t, transferAction.ProgramID, token_program.Program)
+		assert.Equal(t, transferAction.ProgramName, token_program.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "Transfer")
 		assert.Equal(t, transferAction.From, "6MkxxzHTzR9KJfd7PSr1c47ufbY3mfPgyqfgJQso7vtL")
 		assert.Equal(t, transferAction.To, "3ZiTyuCBHqFocKpFvU8wPwd6YM284aswxMZfad4w2ode")
@@ -295,9 +295,9 @@ func TestTokenProgramTransferChecked(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if transferAction, ok := action.(*tokenProgram.TransferCheckedAction); ok {
-		assert.Equal(t, transferAction.ProgramID, tokenProgram.Program)
-		assert.Equal(t, transferAction.ProgramName, tokenProgram.ProgramName)
+	if transferAction, ok := action.(*token_program.TransferCheckedAction); ok {
+		assert.Equal(t, transferAction.ProgramID, token_program.Program)
+		assert.Equal(t, transferAction.ProgramName, token_program.ProgramName)
 		assert.Equal(t, transferAction.InstructionName, "TransferChecked")
 		assert.Equal(t, transferAction.From, "263W2H6WRhAiXv9r7fpwLya2AweHLGn6GGXH32gLEL7c")
 		assert.Equal(t, transferAction.To, "cE8P4G5bRQt4LqR2Moa9bo4hChQGXLXMhNvvLkQt5Tj")
@@ -317,9 +317,9 @@ func TestTokenProgramInitializeAccount(t *testing.T) {
 	results, _ := Parser(byteValue)
 	action := results[0].Actions[3]
 
-	if initAction, ok := action.(*tokenProgram.InitializeAccountAction); ok {
-		assert.Equal(t, initAction.ProgramID, tokenProgram.Program)
-		assert.Equal(t, initAction.ProgramName, tokenProgram.ProgramName)
+	if initAction, ok := action.(*token_program.InitializeAccountAction); ok {
+		assert.Equal(t, initAction.ProgramID, token_program.Program)
+		assert.Equal(t, initAction.ProgramName, token_program.ProgramName)
 		assert.Equal(t, initAction.InstructionName, "InitializeAccount")
 		assert.Equal(t, initAction.Account, "AgcEC7E1yxeZoRVnAZTmGA86ncrPTqKkBiz1T9F5MxhN")
 		assert.Equal(t, initAction.Mint, "So11111111111111111111111111111111111111112")

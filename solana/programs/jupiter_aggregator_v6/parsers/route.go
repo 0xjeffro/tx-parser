@@ -5,8 +5,8 @@ import (
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6"
 	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
 	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
-	"github.com/0xjeffro/tx-parser/solana/programs/tokenProgram"
-	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/tokenProgram/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
+	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/token_program/parsers"
 	"github.com/0xjeffro/tx-parser/solana/types"
 )
 
@@ -59,20 +59,20 @@ func RouteParser(result *types.ParsedResult, instruction types.Instruction) (*ju
 					toTokenAmount += p.Lamports
 				}
 			}
-		case tokenProgram.Program:
+		case token_program.Program:
 			parsedData, err := TokenProgramParsers.InstructionRouter(result, instr)
 			if err != nil {
 				continue
 			}
 			switch p := parsedData.(type) {
-			case *tokenProgram.TransferAction:
+			case *token_program.TransferAction:
 				if p.From == fromTokenAccount {
 					fromTokenAmount += p.Amount
 				}
 				if p.To == toTokenAccount {
 					toTokenAmount += p.Amount
 				}
-			case *tokenProgram.TransferCheckedAction:
+			case *token_program.TransferCheckedAction:
 				if p.From == fromTokenAccount {
 					fromTokenAmount += p.Amount
 				}
