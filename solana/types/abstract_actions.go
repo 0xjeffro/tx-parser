@@ -4,14 +4,14 @@ type Action interface {
 	GetProgramID() string
 	GetProgramName() string
 	GetInstructionName() string
-	GetActionType() string
+	GetActionLabel() string
 }
 
 type BaseAction struct {
 	ProgramID       string `json:"programId"`
 	ProgramName     string `json:"programName"`
 	InstructionName string `json:"instructionName"`
-	ActionType      string `json:"actionType"`
+	ActionLabel     string `json:"actionLabel"`
 }
 
 func (a BaseAction) GetProgramID() string {
@@ -26,8 +26,8 @@ func (a BaseAction) GetInstructionName() string {
 	return a.InstructionName
 }
 
-func (a BaseAction) GetActionType() string {
-	return a.ActionType
+func (a BaseAction) GetActionLabel() string {
+	return a.ActionLabel
 }
 
 type UnknownAction struct {

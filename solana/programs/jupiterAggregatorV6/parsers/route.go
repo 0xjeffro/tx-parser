@@ -114,7 +114,7 @@ func RouteParser(result *types.ParsedResult, instruction types.Instruction) (*ju
 			ProgramID:       result.AccountList[instruction.ProgramIDIndex],
 			ProgramName:     jupiterAggregatorV6.ProgramName,
 			InstructionName: "Route",
-			ActionType:      "SWAP",
+			ActionLabel:     "SWAP",
 		},
 		SwapActionMixin: types.SwapActionMixin{
 			Who:               user,
