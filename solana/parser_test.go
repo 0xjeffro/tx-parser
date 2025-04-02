@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6"
 	"github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
+	"github.com/0xjeffro/tx-parser/solana/programs/photon_program"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -742,6 +743,32 @@ func TestOKXDEXCommissionSolSwap(t *testing.T) {
 		assert.Equal(t, swapAction.ToToken, "28ECNMKBj66GMBJxq1c3VyzJiKY5gDp2sEYc92Ybpump")
 		assert.Equal(t, swapAction.ToTokenAmount, uint64(5238716646))
 		assert.Equal(t, swapAction.ToTokenDecimals, uint64(6))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
+
+func TestPhotonPumpfunBuy_0(t *testing.T) {
+	byteValue, err := readJsonFile("data/photon_pumpfun_buy_0.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[2]
+	if swapAction, ok := action.(*photon_program.PumpfunBuyAction); ok {
+		assert.Equal(t, swapAction.ProgramID, photon_program.Program)
+		assert.Equal(t, swapAction.ProgramName, photon_program.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "PumpfunBuy")
+		assert.Equal(t, swapAction.ActionLabel, "SWAP")
+		assert.Equal(t, swapAction.Who, "DfMxre4cKmvogbLrPigxmibVTTQDuzjdXojWzjCXXhzj")
+		assert.Equal(t, swapAction.FromToken, globals.WSOL)
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(392079207))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(globals.SOLDecimals))
+		assert.Equal(t, swapAction.ToToken, "HQ4SzFMwYo8TXds1bHD2TvZdL7S75hK8w775rWrVpump")
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(5609742876530))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(6))
+		assert.Equal(t, swapAction.PumpfunFeeAmount, uint64(3920792))
+		assert.Equal(t, swapAction.PhotonFeeAmount, uint64(4000000))
 	} else {
 		t.Errorf("Error type assertion")
 	}

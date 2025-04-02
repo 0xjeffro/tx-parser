@@ -9,6 +9,8 @@ import (
 	JupiterDCA "github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
 	OKXDEXAggregationRouterV2Parsers "github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2/parsers"
+	"github.com/0xjeffro/tx-parser/solana/programs/photon_program"
+	PhotonProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/photon_program/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
 	PumpfunParsers "github.com/0xjeffro/tx-parser/solana/programs/pumpfun/parsers"
 	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
@@ -46,6 +48,8 @@ func router(result *types.ParsedResult, instructionIdx int) (action types.Action
 		return JupiterAggregatorV6.InstructionRouter(result, instruction)
 	case okx_dex_aggregation_router_v2.Program:
 		return OKXDEXAggregationRouterV2Parsers.InstructionRouter(result, instruction)
+	case photon_program.Program:
+		return PhotonProgramParsers.InstructionRouter(result, instruction)
 
 	default:
 		return types.UnknownAction{
