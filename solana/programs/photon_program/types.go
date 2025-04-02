@@ -5,6 +5,12 @@ import "github.com/0xjeffro/tx-parser/solana/types"
 type PumpfunBuyAction struct {
 	types.BaseAction
 	types.SwapActionMixin
-	PumpfunFeeAmount uint64 `json:"pumpfunFee"`
-	PhotonFeeAmount  uint64 `json:"photonFee"`
+	PumpfunFeeAmount uint64 `json:"pumpfunFeeAmount"`
+	PhotonFeeAmount  uint64 `json:"photonFeeAmount"`
+}
+
+type PumpfunSellAction struct {
+	types.BaseAction
+	types.SwapActionMixin
+	PhotonFeeAmount uint64 `json:"photonFeeAmount"`
 }

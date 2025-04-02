@@ -16,6 +16,8 @@ func InstructionRouter(result *types.ParsedResult, instruction types.Instruction
 	switch discriminator {
 	case photon_program.PumpfunBuyDiscriminator:
 		return PumpfunBuyParser(result, instruction)
+	case photon_program.PumpfunSellDiscriminator:
+		return PumpfunSellParser(result, instruction)
 	default:
 		return types.UnknownAction{
 			BaseAction: types.BaseAction{

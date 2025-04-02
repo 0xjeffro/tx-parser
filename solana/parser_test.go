@@ -799,3 +799,28 @@ func TestPhotonPumpfunBuy_1(t *testing.T) {
 		t.Errorf("Error type assertion")
 	}
 }
+
+func TestPhotonPumpfunSell(t *testing.T) {
+	byteValue, err := readJsonFile("data/photon_pumpfun_sell.json")
+	if err != nil {
+		t.Errorf("Error reading JSON file: %v", err)
+	}
+	results, _ := Parser(byteValue)
+	action := results[0].Actions[2]
+	if swapAction, ok := action.(*photon_program.PumpfunSellAction); ok {
+		assert.Equal(t, swapAction.ProgramID, photon_program.Program)
+		assert.Equal(t, swapAction.ProgramName, photon_program.ProgramName)
+		assert.Equal(t, swapAction.InstructionName, "PumpfunSell")
+		assert.Equal(t, swapAction.ActionLabel, "SWAP")
+		assert.Equal(t, swapAction.Who, "CzXW1cD5H9M6d8uFonRqQA5bvfLQtZdaZFJzqpie88HM")
+		assert.Equal(t, swapAction.FromToken, "4fSYiTPwwvU9Ym7CGXG4BNLKMcybg2GZXesYevS8pump")
+		assert.Equal(t, swapAction.FromTokenAmount, uint64(50287397622085))
+		assert.Equal(t, swapAction.FromTokenDecimals, uint64(6))
+		assert.Equal(t, swapAction.ToToken, globals.WSOL)
+		assert.Equal(t, swapAction.ToTokenAmount, uint64(1667803326))
+		assert.Equal(t, swapAction.ToTokenDecimals, uint64(globals.SOLDecimals))
+		assert.Equal(t, swapAction.PhotonFeeAmount, uint64(16678033))
+	} else {
+		t.Errorf("Error type assertion")
+	}
+}
