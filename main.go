@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/0xjeffro/tx-parser/solana"
+	"github.com/thetafunction/tx-parser/solana"
 	"github.com/gin-gonic/gin"
 	"io"
 	"log"

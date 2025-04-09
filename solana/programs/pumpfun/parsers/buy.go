@@ -2,11 +2,11 @@ package parsers
 
 import (
 	"encoding/binary"
-	"github.com/0xjeffro/tx-parser/solana/globals"
-	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
-	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
-	systemParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/globals"
+	"github.com/thetafunction/tx-parser/solana/programs/pumpfun"
+	"github.com/thetafunction/tx-parser/solana/programs/system_program"
+	systemParsers "github.com/thetafunction/tx-parser/solana/programs/system_program/parsers"
+	"github.com/thetafunction/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 	"github.com/near/borsh-go"
 )

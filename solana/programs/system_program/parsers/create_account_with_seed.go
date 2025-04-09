@@ -2,8 +2,8 @@ package parsers
 
 import (
 	"encoding/binary"
-	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/programs/system_program"
+	"github.com/thetafunction/tx-parser/solana/types"
 	solanago "github.com/gagliardetto/solana-go"
 )
 

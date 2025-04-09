@@ -2,8 +2,8 @@ package parsers
 
 import (
 	"encoding/binary"
-	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/programs/token_program"
+	"github.com/thetafunction/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
 

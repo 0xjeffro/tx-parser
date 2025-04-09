@@ -1,6 +1,6 @@
 package raydium_liquidity_pool_v4
 
-import "github.com/0xjeffro/tx-parser/solana/types"
+import "github.com/thetafunction/tx-parser/solana/types"
 
 type SwapAction struct {
 	types.BaseAction

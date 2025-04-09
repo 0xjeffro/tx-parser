@@ -2,7 +2,7 @@ package solana
 
 import (
 	"encoding/json"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/types"
 )
 
 func Parser(rpcData []byte) ([]types.ParsedResult, error) {

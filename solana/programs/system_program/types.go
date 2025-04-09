@@ -1,6 +1,6 @@
 package system_program
 
-import "github.com/0xjeffro/tx-parser/solana/types"
+import "github.com/thetafunction/tx-parser/solana/types"
 
 type TransferAction struct {
 	types.BaseAction

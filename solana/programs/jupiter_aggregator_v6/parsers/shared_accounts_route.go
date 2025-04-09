@@ -1,13 +1,13 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/globals"
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6"
-	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
-	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
-	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
-	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/token_program/parsers"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/globals"
+	"github.com/thetafunction/tx-parser/solana/programs/jupiter_aggregator_v6"
+	"github.com/thetafunction/tx-parser/solana/programs/system_program"
+	SystemProgramParsers "github.com/thetafunction/tx-parser/solana/programs/system_program/parsers"
+	"github.com/thetafunction/tx-parser/solana/programs/token_program"
+	TokenProgramParsers "github.com/thetafunction/tx-parser/solana/programs/token_program/parsers"
+	"github.com/thetafunction/tx-parser/solana/types"
 )
 
 func SharedAccountsRouteParser(result *types.ParsedResult, instruction types.Instruction) (*jupiter_aggregator_v6.SharedAccountRouteAction, error) {

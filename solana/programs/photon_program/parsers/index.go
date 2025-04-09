@@ -1,8 +1,8 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/photon_program"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/programs/photon_program"
+	"github.com/thetafunction/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 )
 

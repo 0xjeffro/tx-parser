@@ -1,6 +1,6 @@
 package jupiter_dca
 
-import "github.com/0xjeffro/tx-parser/solana/types"
+import "github.com/thetafunction/tx-parser/solana/types"
 
 type OpenV2Action struct {
 	types.BaseAction

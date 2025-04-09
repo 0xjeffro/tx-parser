@@ -1,8 +1,8 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/programs/raydium_liquidity_pool_v4"
+	"github.com/thetafunction/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 )
 

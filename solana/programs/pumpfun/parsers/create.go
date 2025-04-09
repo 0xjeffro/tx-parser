@@ -1,8 +1,8 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/programs/pumpfun"
+	"github.com/thetafunction/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
 

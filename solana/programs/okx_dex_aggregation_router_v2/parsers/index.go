@@ -1,8 +1,8 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
+	"github.com/thetafunction/tx-parser/solana/types"
 	"github.com/mr-tron/base58"
 )
 

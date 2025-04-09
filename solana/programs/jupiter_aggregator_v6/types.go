@@ -1,6 +1,6 @@
 package jupiter_aggregator_v6
 
-import "github.com/0xjeffro/tx-parser/solana/types"
+import "github.com/thetafunction/tx-parser/solana/types"
 
 type SharedAccountRouteAction struct {
 	types.BaseAction

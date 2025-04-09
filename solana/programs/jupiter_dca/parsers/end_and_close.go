@@ -1,8 +1,8 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/programs/jupiter_dca"
+	"github.com/thetafunction/tx-parser/solana/types"
 )
 
 func EndAndCloseParser(result *types.ParsedResult, instruction types.Instruction) (*jupiter_dca.EndAndCloseAction, error) {

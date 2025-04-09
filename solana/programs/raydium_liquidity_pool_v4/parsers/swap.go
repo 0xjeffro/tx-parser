@@ -1,11 +1,11 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/globals"
-	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
-	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
-	TokenProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/token_program/parsers"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/globals"
+	"github.com/thetafunction/tx-parser/solana/programs/raydium_liquidity_pool_v4"
+	"github.com/thetafunction/tx-parser/solana/programs/token_program"
+	TokenProgramParsers "github.com/thetafunction/tx-parser/solana/programs/token_program/parsers"
+	"github.com/thetafunction/tx-parser/solana/types"
 	"github.com/near/borsh-go"
 )
 

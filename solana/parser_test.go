@@ -1,21 +1,23 @@
 package solana
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_aggregator_v6"
-	"github.com/0xjeffro/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
-	"github.com/0xjeffro/tx-parser/solana/programs/photon_program"
 	"io/ioutil"
 	"os"
 	"testing"
 
-	"github.com/0xjeffro/tx-parser/solana/globals"
-	"github.com/0xjeffro/tx-parser/solana/programs/compute_budget"
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
-	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
-	"github.com/0xjeffro/tx-parser/solana/programs/raydium_liquidity_pool_v4"
-	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
-	"github.com/0xjeffro/tx-parser/solana/programs/token_program"
+	"github.com/thetafunction/tx-parser/solana/programs/jupiter_aggregator_v6"
+	"github.com/thetafunction/tx-parser/solana/programs/okx_dex_aggregation_router_v2"
+	"github.com/thetafunction/tx-parser/solana/programs/photon_program"
+
+	"github.com/thetafunction/tx-parser/solana/globals"
+	"github.com/thetafunction/tx-parser/solana/programs/compute_budget"
+	"github.com/thetafunction/tx-parser/solana/programs/jupiter_dca"
+	"github.com/thetafunction/tx-parser/solana/programs/pumpfun"
+	"github.com/thetafunction/tx-parser/solana/programs/raydium_liquidity_pool_v4"
+	"github.com/thetafunction/tx-parser/solana/programs/system_program"
+	"github.com/thetafunction/tx-parser/solana/programs/token_program"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -66,6 +68,8 @@ func TestPumpFunSell_0(t *testing.T) {
 	} else {
 		t.Errorf("Error type assertion")
 	}
+	jsonBytes, _ := json.Marshal(results[0].Actions[3])
+	fmt.Println(string(jsonBytes))
 }
 
 func TestPumpFunBuy_0(t *testing.T) {

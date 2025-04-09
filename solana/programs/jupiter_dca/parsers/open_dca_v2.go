@@ -2,8 +2,8 @@ package parsers
 
 import (
 	"encoding/binary"
-	"github.com/0xjeffro/tx-parser/solana/programs/jupiter_dca"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/programs/jupiter_dca"
+	"github.com/thetafunction/tx-parser/solana/types"
 )
 
 func OpenDcaV2Parser(result *types.ParsedResult, instruction types.Instruction, decodedData []byte) (*jupiter_dca.OpenV2Action, error) {

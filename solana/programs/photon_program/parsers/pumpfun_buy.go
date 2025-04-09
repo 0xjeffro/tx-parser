@@ -1,13 +1,13 @@
 package parsers
 
 import (
-	"github.com/0xjeffro/tx-parser/solana/globals"
-	"github.com/0xjeffro/tx-parser/solana/programs/photon_program"
-	"github.com/0xjeffro/tx-parser/solana/programs/pumpfun"
-	PumpfunParsers "github.com/0xjeffro/tx-parser/solana/programs/pumpfun/parsers"
-	"github.com/0xjeffro/tx-parser/solana/programs/system_program"
-	SystemProgramParsers "github.com/0xjeffro/tx-parser/solana/programs/system_program/parsers"
-	"github.com/0xjeffro/tx-parser/solana/types"
+	"github.com/thetafunction/tx-parser/solana/globals"
+	"github.com/thetafunction/tx-parser/solana/programs/photon_program"
+	"github.com/thetafunction/tx-parser/solana/programs/pumpfun"
+	PumpfunParsers "github.com/thetafunction/tx-parser/solana/programs/pumpfun/parsers"
+	"github.com/thetafunction/tx-parser/solana/programs/system_program"
+	SystemProgramParsers "github.com/thetafunction/tx-parser/solana/programs/system_program/parsers"
+	"github.com/thetafunction/tx-parser/solana/types"
 )
 
 func PumpfunBuyParser(result *types.ParsedResult, instruction types.Instruction) (*photon_program.PumpfunBuyAction, error) {
